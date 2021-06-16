@@ -58,7 +58,7 @@ function Rule ({ members, onClose }: Props): React.ReactElement<Props> {
       <Modal.Actions onCancel={onClose}>
         <TxButton
           accountId={accountId}
-          isDisabled={!accountId || !rule}
+          isDisabled={!accountId || !ruleEncode}
           label={t<string>('Set rule')}
           onStart={onClose}
           params={[propose]}

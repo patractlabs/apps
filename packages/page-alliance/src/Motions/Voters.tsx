@@ -24,9 +24,7 @@ function Voters ({ isAye, members, threshold, votes }: Props): React.ReactElemen
       const num = threshold.toNumber();
       const max = isAye
         ? num
-        : members?.length
-          ? (members.length - num) + 1
-          : 0;
+        : (members.length - num + 1);
 
       return `${votes.length}${max ? `/${max}` : ''}`;
     },
