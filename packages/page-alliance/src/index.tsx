@@ -41,7 +41,7 @@ function AllianceApp ({ basePath, className }: Props): React.ReactElement<Props>
   const ruleEncode = useCidEncode(rule?.unwrapOrDefault());
   const candidates = useCall<Vec<AccountId>>(api.query.alliance.candidates);
   const announcements = useCall<Vec<Cid>>(api.query.alliance.announcements);
-  const members = useMemo(() => {
+  const members = useMemo((): string[] => {
     return founders.concat(fellows);
   }, [fellows, founders]);
   const [favorites, toggleFavorite] = useFavorites(STORE_FAVS_BASE);
@@ -92,7 +92,8 @@ function AllianceApp ({ basePath, className }: Props): React.ReactElement<Props>
           <Blacklist
             accountBlacklist={accountBlacklist?.map((account) => account.toString()) || []}
             isMember={isMember}
-            websiteBlacklist={websiteBlacklist?.map((website) => website.toString()) || []}
+            members={members}
+            websiteBlacklist={websiteBlacklist?.map((website) => website.toHuman() as string) || []}
           />
         </Route>
         <Route path={`${basePath}/candidates`}>
@@ -100,6 +101,7 @@ function AllianceApp ({ basePath, className }: Props): React.ReactElement<Props>
             candidates={candidates?.map((candidate) => candidate.toString()) || []}
             favorites={favorites}
             isMember={isMember}
+            members={members}
             toggleFavorite={toggleFavorite}
           />
         </Route>
@@ -107,6 +109,7 @@ function AllianceApp ({ basePath, className }: Props): React.ReactElement<Props>
           <Announcements
             announcements={announcements?.map((announcement) => announcement) || []}
             isMember={isMember}
+            members={members}
           />
         </Route>
         <Route path={`${basePath}/motions`}>
@@ -123,6 +126,7 @@ function AllianceApp ({ basePath, className }: Props): React.ReactElement<Props>
             fellows={fellows}
             founders={founders}
             isMember={isMember}
+            members={members}
             rule={ruleEncode}
             toggleFavorite={toggleFavorite}
           />

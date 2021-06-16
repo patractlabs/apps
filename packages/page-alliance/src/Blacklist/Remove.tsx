@@ -13,9 +13,10 @@ interface Props {
   accountBlacklist: string[];
   websiteBlacklist: string[];
   isMember: boolean;
+  members: string[];
 }
 
-function Remove ({ accountBlacklist, className, isMember, websiteBlacklist }: Props): React.ReactElement<Props> {
+function Remove ({ accountBlacklist, className, isMember, members, websiteBlacklist }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { api } = useApi();
   const [isVisible, toggleVisible] = useToggle();
@@ -50,6 +51,7 @@ function Remove ({ accountBlacklist, className, isMember, websiteBlacklist }: Pr
         <Modal.Content>
           <Modal.Columns hint={t<string>('xxx')}>
             <InputAddress
+              filter={members}
               help={t<string>('xxx')}
               label={t<string>('xxx')}
               onChange={setAccountId}

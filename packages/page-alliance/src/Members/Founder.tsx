@@ -15,11 +15,12 @@ interface Props {
   founder: string;
   isFavorite: boolean;
   isMember: boolean;
+  members: string[];
   onRetire: (address: string) => void;
   toggleFavorite: (address: string) => void;
 }
 
-function Founder ({ className, founder, isMember, onRetire }: Props): React.ReactElement<Props> {
+function Founder ({ className, founder, isMember, members, onRetire }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const website = useWebsite(founder);
   const [isMenuOpen, toggleMenu] = useToggle();
@@ -88,6 +89,7 @@ function Founder ({ className, founder, isMember, onRetire }: Props): React.Reac
     </tr>
     {isKickOpen && <Kick
       address={founder}
+      members={members}
       onClose={toggleKick}
     />}
   </>;

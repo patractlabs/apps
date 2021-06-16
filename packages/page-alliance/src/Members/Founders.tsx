@@ -13,11 +13,12 @@ interface Props {
   founders: string[]
   favorites: string[];
   isMember: boolean;
+  members: string[];
   onRetire: (address: string) => void;
   toggleFavorite: (address: string) => void;
 }
 
-function Founders ({ className = '', favorites, founders, isMember, onRetire, toggleFavorite }: Props): React.ReactElement<Props> {
+function Founders ({ className = '', favorites, founders, isMember, members, onRetire, toggleFavorite }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
 
   const header = useMemo(() => [
@@ -36,6 +37,7 @@ function Founders ({ className = '', favorites, founders, isMember, onRetire, to
       isFavorite={favorites.includes(founder)}
       isMember={isMember}
       key={founder}
+      members={members}
       onRetire={onRetire}
       toggleFavorite={toggleFavorite}
     />)}

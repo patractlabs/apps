@@ -12,9 +12,10 @@ interface Props {
   className?: string;
   candidate: string;
   isMember: boolean;
+  members: string[];
 }
 
-function Propose ({ candidate, isMember }: Props): React.ReactElement<Props> {
+function Propose ({ candidate, isMember, members }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { api } = useApi();
   const [isVisible, toggleVisible] = useToggle();
@@ -38,6 +39,7 @@ function Propose ({ candidate, isMember }: Props): React.ReactElement<Props> {
         <Modal.Content>
           <Modal.Columns hint={t<string>('The vote will be recorded for the selected account.')}>
             <InputAddress
+              filter={members}
               help={t<string>('This account will be use to propose candidacy.')}
               label={t<string>('propose account')}
               onChange={setAccountId}
@@ -46,11 +48,11 @@ function Propose ({ candidate, isMember }: Props): React.ReactElement<Props> {
           </Modal.Columns>
           <Modal.Columns hint={t<string>('xxx')}>
             <InputAddress
+              defaultValue={candidate}
               help={t<string>('xxx')}
               isDisabled
               label={t<string>('Candidate')}
               type='account'
-              value={candidate}
             />
           </Modal.Columns>
         </Modal.Content>

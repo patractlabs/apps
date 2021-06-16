@@ -15,10 +15,11 @@ interface Props {
   candidates: string[];
   favorites: string[];
   isMember: boolean;
+  members: string[];
   toggleFavorite: (address: string) => void;
 }
 
-function Candidates ({ candidates, favorites, isMember, toggleFavorite }: Props): React.ReactElement<Props> {
+function Candidates ({ candidates, favorites, isMember, members, toggleFavorite }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
 
   const header = useMemo(() => [
@@ -30,7 +31,10 @@ function Candidates ({ candidates, favorites, isMember, toggleFavorite }: Props)
   return <>
     <Button.Group>
       <Submit />
-      <Nominate isMember={isMember} />
+      <Nominate
+        isMember={isMember}
+        members={members}
+      />
     </Button.Group>
     <Table
       empty={t<string>('No candidates')}
@@ -41,6 +45,7 @@ function Candidates ({ candidates, favorites, isMember, toggleFavorite }: Props)
         isFavorite={favorites.includes(candidate)}
         isMember={isMember}
         key={candidate}
+        members={members}
         toggleFavorite={toggleFavorite}
       />)}
     </Table>

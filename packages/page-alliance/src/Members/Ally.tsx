@@ -16,11 +16,12 @@ interface Props {
   ally: string;
   isFavorite: boolean;
   isMember: boolean;
+  members: string[];
   onRetire: (address: string) => void;
   toggleFavorite: (address: string) => void;
 }
 
-function Ally ({ ally, className, isMember, onRetire }: Props): React.ReactElement<Props> {
+function Ally ({ ally, className, isMember, members, onRetire }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const website = useWebsite(ally);
   const [isMenuOpen, toggleMenu] = useToggle();
@@ -99,11 +100,13 @@ function Ally ({ ally, className, isMember, onRetire }: Props): React.ReactEleme
     {isKickOpen && <Kick
       address={ally}
       key='kick'
+      members={members}
       onClose={toggleKick}
     />}
     {isElevateOpen && <Elevate
       address={ally}
       key='elevate'
+      members={members}
       onClose={toggleElevate}
     />}
   </>;

@@ -11,9 +11,10 @@ import { useTranslation } from '../translate';
 interface Props {
   className?: string;
   isMember: boolean;
+  members: string[];
 }
 
-function Nominate ({ className, isMember }: Props): React.ReactElement<Props> {
+function Nominate ({ className, isMember, members }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { api } = useApi();
   const [isVisible, toggleVisible] = useToggle();
@@ -36,6 +37,7 @@ function Nominate ({ className, isMember }: Props): React.ReactElement<Props> {
         <Modal.Content>
           <Modal.Columns hint={t<string>('xxx')}>
             <InputAddress
+              filter={members}
               help={t<string>('This account will be use to nominate candidacy.')}
               label={t<string>('Nominate account')}
               onChange={setAccountId}

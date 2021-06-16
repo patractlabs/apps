@@ -12,9 +12,10 @@ import { useCidDecode } from '../useCid';
 interface Props {
   className?: string
   isMember: boolean;
+  members: string[];
 }
 
-function Rule ({ className = '', isMember }: Props): React.ReactElement<Props> {
+function Rule ({ className = '', isMember, members }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const [isVisible, toggleVisible] = useToggle();
   const [accountId, setAccountId] = useState<string | null>(null);
@@ -47,6 +48,7 @@ function Rule ({ className = '', isMember }: Props): React.ReactElement<Props> {
         <Modal.Content>
           <Modal.Columns hint={t<string>('The vote will be recorded for the selected account.')}>
             <InputAddress
+              filter={members}
               help={t<string>('This account will be use to propose set rule.')}
               label={t<string>('propose account')}
               onChange={setAccountId}

@@ -15,9 +15,10 @@ interface Props {
   className?: string;
   announcements: Cid[];
   isMember: boolean;
+  members: string[];
 }
 
-function Announcements ({ announcements, isMember }: Props): React.ReactElement<Props> {
+function Announcements ({ announcements, isMember, members }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
 
   const header = useMemo(() => [
@@ -26,7 +27,10 @@ function Announcements ({ announcements, isMember }: Props): React.ReactElement<
 
   return <>
     <Button.Group>
-      <Propose isMember={isMember} />
+      <Propose
+        isMember={isMember}
+        members={members}
+      />
     </Button.Group>
     <Table
       empty={t<string>('No announcements')}

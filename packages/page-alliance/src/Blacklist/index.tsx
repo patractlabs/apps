@@ -13,9 +13,10 @@ interface Props {
   accountBlacklist: string[];
   websiteBlacklist: string[];
   isMember: boolean;
+  members: string[];
 }
 
-function Blacklist ({ accountBlacklist, isMember, websiteBlacklist }: Props): React.ReactElement<Props> {
+function Blacklist ({ accountBlacklist, isMember, members, websiteBlacklist }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
 
   const accountHeader = useMemo(() => [
@@ -27,10 +28,14 @@ function Blacklist ({ accountBlacklist, isMember, websiteBlacklist }: Props): Re
 
   return <>
     <Button.Group>
-      <Add isMember={isMember} />
+      <Add
+        isMember={isMember}
+        members={members}
+      />
       <Remove
         accountBlacklist={accountBlacklist}
         isMember={isMember}
+        members={members}
         websiteBlacklist={websiteBlacklist}
       />
     </Button.Group>
@@ -48,7 +53,13 @@ function Blacklist ({ accountBlacklist, isMember, websiteBlacklist }: Props): Re
         <Table header={websiteHeader}>
           {websiteBlacklist.map((website) => <tr key={website}>
             <td>
-              <AddressSmall value={website} />
+              <a
+                href={website}
+                rel='noopener noreferrer'
+                target='_blank'
+              >
+                {website}
+              </a>
             </td>
           </tr>)}
         </Table>

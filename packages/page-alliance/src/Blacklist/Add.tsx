@@ -12,6 +12,7 @@ import { useTranslation } from '../translate';
 interface Props {
   className?: string;
   isMember: boolean;
+  members: string[];
 }
 
 interface ItemProps {
@@ -75,7 +76,7 @@ function AddItem ({ index, onChange, value }: ItemProps): React.ReactElement<Ite
   </Columar>;
 }
 
-function Add ({ className, isMember }: Props): React.ReactElement<Props> {
+function Add ({ className, isMember, members }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { api } = useApi();
   const [isVisible, toggleVisible] = useToggle();
@@ -120,6 +121,7 @@ function Add ({ className, isMember }: Props): React.ReactElement<Props> {
         <Modal.Content>
           <Modal.Columns hint={t<string>('xxx')}>
             <InputAddress
+              filter={members}
               help={t<string>('xxx')}
               label={t<string>('xxx')}
               onChange={setAccountId}

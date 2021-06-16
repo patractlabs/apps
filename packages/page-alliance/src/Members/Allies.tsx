@@ -13,11 +13,12 @@ interface Props {
   allies: string[]
   favorites: string[];
   isMember: boolean;
+  members: string[];
   onRetire: (address: string) => void;
   toggleFavorite: (address: string) => void;
 }
 
-function Allies ({ allies, className = '', favorites, isMember, onRetire, toggleFavorite }: Props): React.ReactElement<Props> {
+function Allies ({ allies, className = '', favorites, isMember, members, onRetire, toggleFavorite }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
 
   const header = useMemo(() => [
@@ -36,6 +37,7 @@ function Allies ({ allies, className = '', favorites, isMember, onRetire, toggle
       isFavorite={favorites.includes(ally)}
       isMember={isMember}
       key={ally}
+      members={members}
       onRetire={onRetire}
       toggleFavorite={toggleFavorite}
     />)}

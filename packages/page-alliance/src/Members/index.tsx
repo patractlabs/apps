@@ -20,12 +20,13 @@ interface Props {
   fellows: string[];
   founders: string[];
   isMember: boolean;
+  members: string[];
   rule: string | null;
   favorites: string[]
   toggleFavorite: (address: string) => void;
 }
 
-function Members ({ allies, className = '', favorites, fellows, founders, isMember, rule, toggleFavorite }: Props): React.ReactElement<Props> {
+function Members ({ allies, className = '', favorites, fellows, founders, isMember, members, rule, toggleFavorite }: Props): React.ReactElement<Props> {
   const { api } = useApi();
   const { queueExtrinsic } = useContext(StatusContext);
 
@@ -42,6 +43,7 @@ function Members ({ allies, className = '', favorites, fellows, founders, isMemb
     <div className={className}>
       <Summary
         isMember={isMember}
+        members={members}
         rule={rule}
       />
       <Founders
@@ -49,6 +51,7 @@ function Members ({ allies, className = '', favorites, fellows, founders, isMemb
         favorites={favorites}
         founders={founders}
         isMember={isMember}
+        members={members}
         onRetire={onRetire}
         toggleFavorite={toggleFavorite}
       />
@@ -57,6 +60,7 @@ function Members ({ allies, className = '', favorites, fellows, founders, isMemb
         favorites={favorites}
         fellows={fellows}
         isMember={isMember}
+        members={members}
         onRetire={onRetire}
         toggleFavorite={toggleFavorite}
       />
@@ -65,6 +69,7 @@ function Members ({ allies, className = '', favorites, fellows, founders, isMemb
         className='ui--AllianceMember-table'
         favorites={favorites}
         isMember={isMember}
+        members={members}
         onRetire={onRetire}
         toggleFavorite={toggleFavorite}
       />
@@ -72,8 +77,10 @@ function Members ({ allies, className = '', favorites, fellows, founders, isMemb
   );
 }
 
-export default React.memo(styled(Members)`
+const StyledMembers: React.FC<Props> = styled(Members)`
   .ui--AllianceMember-table table tr > td.address {
     width: 40%;
   }
-`);
+`;
+
+export default React.memo(StyledMembers);

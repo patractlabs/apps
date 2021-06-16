@@ -12,9 +12,10 @@ interface Props {
   className?: string;
   rule: string | null;
   isMember: boolean;
+  members: string[];
 }
 
-function Summary ({ className, isMember, rule }: Props): React.ReactElement<Props> {
+function Summary ({ className, isMember, members, rule }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
 
   const header = useMemo(() => [
@@ -38,7 +39,10 @@ function Summary ({ className, isMember, rule }: Props): React.ReactElement<Prop
         </a>
       </td>
       <td className='button'>
-        <Rule isMember={isMember} />
+        <Rule
+          isMember={isMember}
+          members={members}
+        />
       </td>
     </tr>
   </Table>;

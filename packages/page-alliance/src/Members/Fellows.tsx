@@ -13,11 +13,12 @@ interface Props {
   fellows: string[]
   favorites: string[];
   isMember: boolean;
+  members: string[];
   onRetire: (address: string) => void;
   toggleFavorite: (address: string) => void;
 }
 
-function Fellows ({ className = '', favorites, fellows, isMember, onRetire, toggleFavorite }: Props): React.ReactElement<Props> {
+function Fellows ({ className = '', favorites, fellows, isMember, members, onRetire, toggleFavorite }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
 
   const header = useMemo(() => [
@@ -36,6 +37,7 @@ function Fellows ({ className = '', favorites, fellows, isMember, onRetire, togg
       isFavorite={favorites.includes(fellow)}
       isMember={isMember}
       key={fellow}
+      members={members}
       onRetire={onRetire}
       toggleFavorite={toggleFavorite}
     />)}

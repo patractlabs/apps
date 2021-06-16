@@ -15,11 +15,12 @@ interface Props {
   fellow: string;
   isFavorite: boolean;
   isMember: boolean;
+  members: string[];
   onRetire: (address: string) => void;
   toggleFavorite: (address: string) => void;
 }
 
-function Fellow ({ className, fellow, isMember, onRetire }: Props): React.ReactElement<Props> {
+function Fellow ({ className, fellow, isMember, members, onRetire }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const website = useWebsite(fellow);
   const [isMenuOpen, toggleMenu] = useToggle();
@@ -88,6 +89,7 @@ function Fellow ({ className, fellow, isMember, onRetire }: Props): React.ReactE
     </tr>
     {isKickOpen && <Kick
       address={fellow}
+      members={members}
       onClose={toggleKick}
     />}
   </>;
