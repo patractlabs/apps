@@ -1,10 +1,11 @@
 // Copyright 2017-2021 @polkadot/app-alliance authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import React, { useCallback } from 'react';
+import React from 'react';
 
-import { AddressSmall, Icon } from '@polkadot/react-components';
+import { AddressSmall } from '@polkadot/react-components';
 
+import { useDeposit } from '../useDeposit';
 import { useWebsite } from '../useWebsite';
 import Propose from './Propose';
 
@@ -17,19 +18,11 @@ interface Props {
   toggleFavorite: (address: string) => void;
 }
 
-function Candidate ({ candidate, className, isFavorite, isMember, members, toggleFavorite }: Props): React.ReactElement<Props> {
+function Candidate ({ candidate, className, isMember, members }: Props): React.ReactElement<Props> {
   const website = useWebsite(candidate);
-
-  const _onFavorite = useCallback(() => toggleFavorite(candidate), [candidate, toggleFavorite]);
+  const deposite = useDeposit(candidate);
 
   return <tr className={className}>
-    <td className='favorite'>
-      <Icon
-        color={isFavorite ? 'orange' : 'gray'}
-        icon='star'
-        onClick={_onFavorite}
-      />
-    </td>
     <td className='address'><AddressSmall value={candidate} /></td>
     <td className='start'>
       <a
@@ -39,6 +32,11 @@ function Candidate ({ candidate, className, isFavorite, isMember, members, toggl
       >
         {website}
       </a>
+    </td>
+    <td className='start'>
+      {
+        deposite
+      }
     </td>
     <td className='button'>
       <Propose

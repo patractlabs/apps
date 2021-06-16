@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import React, { useMemo } from 'react';
+import styled from 'styled-components';
 
 import { Table } from '@polkadot/react-components';
 
@@ -22,8 +23,9 @@ function Allies ({ allies, className = '', favorites, isMember, members, onRetir
   const { t } = useTranslation();
 
   const header = useMemo(() => [
-    [t('Allies'), 'start'],
-    [t('Website'), 'start', undefined],
+    [t('Allies'), 'start account'],
+    [t('Website'), 'start website', undefined],
+    [t('Deposit'), 'start deposit'],
     [undefined, undefined, undefined]
   ], [t]);
 
@@ -44,4 +46,16 @@ function Allies ({ allies, className = '', favorites, isMember, members, onRetir
   </Table>;
 }
 
-export default React.memo(Allies);
+export default React.memo(styled(Allies)`
+  tr .account {
+    width: 40%;
+  }
+
+  tr .website {
+    width: 32%;
+  }
+
+  tr .deposite {
+    width: 17%;
+  }
+`);

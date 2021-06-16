@@ -7,6 +7,7 @@ import { AddressSmall, Button, Menu, Popup } from '@polkadot/react-components';
 import { useAccounts, useToggle } from '@polkadot/react-hooks';
 
 import { useTranslation } from '../translate';
+import { useDeposit } from '../useDeposit';
 import { useWebsite } from '../useWebsite';
 import Elevate from './Elevate';
 import Kick from './Kick';
@@ -28,6 +29,7 @@ function Ally ({ ally, className, isMember, members, onRetire }: Props): React.R
   const [isKickOpen, toggleKick] = useToggle();
   const [isElevateOpen, toggleElevate] = useToggle();
   const { allAccounts } = useAccounts();
+  const deposite = useDeposit(ally);
 
   const _onRetire = useCallback(() => onRetire(ally), [ally, onRetire]);
 
@@ -74,6 +76,11 @@ function Ally ({ ally, className, isMember, members, onRetire }: Props): React.R
         >
           {website}
         </a>
+      </td>
+      <td className='start'>
+        {
+          deposite
+        }
       </td>
       <td className='button'>
         <Popup

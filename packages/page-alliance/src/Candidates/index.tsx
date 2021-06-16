@@ -23,8 +23,9 @@ function Candidates ({ candidates, favorites, isMember, members, toggleFavorite 
   const { t } = useTranslation();
 
   const header = useMemo(() => [
-    [t('Candidates'), 'start', 2],
+    [t('Candidates'), 'start'],
     [t('Website'), 'start'],
+    [t('Deposit'), 'start'],
     [undefined, undefined]
   ], [t]);
 

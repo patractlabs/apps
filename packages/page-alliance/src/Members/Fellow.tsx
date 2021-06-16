@@ -7,6 +7,7 @@ import { AddressSmall, Button, Menu, Popup } from '@polkadot/react-components';
 import { useAccounts, useToggle } from '@polkadot/react-hooks';
 
 import { useTranslation } from '../translate';
+import { useDeposit } from '../useDeposit';
 import { useWebsite } from '../useWebsite';
 import Kick from './Kick';
 
@@ -26,6 +27,7 @@ function Fellow ({ className, fellow, isMember, members, onRetire }: Props): Rea
   const [isMenuOpen, toggleMenu] = useToggle();
   const [isKickOpen, toggleKick] = useToggle();
   const { allAccounts } = useAccounts();
+  const deposite = useDeposit(fellow);
 
   const _onRetire = useCallback(() => onRetire(fellow), [fellow, onRetire]);
 
@@ -64,6 +66,11 @@ function Fellow ({ className, fellow, isMember, members, onRetire }: Props): Rea
         >
           {website}
         </a>
+      </td>
+      <td className='start'>
+        {
+          deposite
+        }
       </td>
       <td className='button'>
         <Popup

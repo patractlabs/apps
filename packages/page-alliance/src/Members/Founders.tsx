@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import React, { useMemo } from 'react';
+import styled from 'styled-components';
 
 import { Table } from '@polkadot/react-components';
 
@@ -22,8 +23,9 @@ function Founders ({ className = '', favorites, founders, isMember, members, onR
   const { t } = useTranslation();
 
   const header = useMemo(() => [
-    [t('Founders'), 'start'],
-    [t('Website'), 'start', undefined],
+    [t('Founders'), 'start account'],
+    [t('Website'), 'start website', undefined],
+    [t('Deposit'), 'start deposit'],
     [undefined, undefined, undefined]
   ], [t]);
 
@@ -44,4 +46,16 @@ function Founders ({ className = '', favorites, founders, isMember, members, onR
   </Table>;
 }
 
-export default React.memo(Founders);
+export default React.memo(styled(Founders)`
+  tr .account {
+    width: 40%;
+  }
+
+  tr .website {
+    width: 32%;
+  }
+
+  tr .deposite {
+    width: 17%;
+  }
+`);
