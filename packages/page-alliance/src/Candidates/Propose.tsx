@@ -3,7 +3,7 @@
 
 import React, { useMemo, useState } from 'react';
 
-import { Button, InputAddress, Modal, TxButton } from '@polkadot/react-components';
+import { Button, Dropdown, InputAddress, Modal, TxButton } from '@polkadot/react-components';
 import { useApi, useToggle } from '@polkadot/react-hooks';
 
 import { useTranslation } from '../translate';
@@ -20,9 +20,18 @@ function Propose ({ candidate, isMember, members }: Props): React.ReactElement<P
   const { api } = useApi();
   const [isVisible, toggleVisible] = useToggle();
   const [accountId, setAccountId] = useState<string | null>(null);
+  const [allianceType, setAllianceType] = useState('accept');
 
-  const approval = useMemo(() => api.tx.alliance.approveCandidate(candidate), [api.tx.alliance, candidate]);
-  const rejection = useMemo(() => api.tx.alliance.rejectCandidate(candidate), [api.tx.alliance, candidate]);
+  const allianceTypeOpt = useMemo(() => [
+    { text: t<string>('Acceptance proposal'), value: 'accept' },
+    { text: t<string>('Rejection proposal'), value: 'reject' }
+  ], [t]);
+
+  const proposal = useMemo(() => {
+    return allianceType === 'reject'
+      ? api.tx.alliance.rejectCandidate(candidate)
+      : api.tx.alliance.approveCandidate(candidate);
+  }, [allianceType, api.tx.alliance, candidate]);
 
   return <>
     <Button
@@ -33,7 +42,7 @@ function Propose ({ candidate, isMember, members }: Props): React.ReactElement<P
     />
     {isVisible && (
       <Modal
-        header={t<string>('Propose candidacy')}
+        header={t<string>('Propose an alliance motion')}
         size='large'
       >
         <Modal.Content>
@@ -47,12 +56,12 @@ function Propose ({ candidate, isMember, members }: Props): React.ReactElement<P
             />
           </Modal.Columns>
           <Modal.Columns hint={t<string>('xxx')}>
-            <InputAddress
-              defaultValue={candidate}
-              help={t<string>('xxx')}
-              isDisabled
-              label={t<string>('Candidate')}
-              type='account'
+            <Dropdown
+              help={t<string>('The type of alliance proposal to submit.')}
+              label={t<string>('alliance proposal type')}
+              onChange={setAllianceType}
+              options={allianceTypeOpt}
+              value={allianceType}
             />
           </Modal.Columns>
         </Modal.Content>
@@ -60,17 +69,9 @@ function Propose ({ candidate, isMember, members }: Props): React.ReactElement<P
           <TxButton
             accountId={accountId}
             isDisabled={!accountId}
-            label={t<string>('Approve')}
+            label={t<string>('Propose')}
             onStart={toggleVisible}
-            params={[approval]}
-            tx={api.tx.alliance.propose}
-          />
-          <TxButton
-            accountId={accountId}
-            isDisabled={!accountId}
-            label={t<string>('Rejection')}
-            onStart={toggleVisible}
-            params={[rejection]}
+            params={[proposal]}
             tx={api.tx.alliance.propose}
           />
         </Modal.Actions>

@@ -115,7 +115,7 @@ function Add ({ className, isMember, members }: Props): React.ReactElement<Props
     />
     {isVisible && (
       <Modal
-        header={t<string>('Add blacklist')}
+        header={t<string>('Propose an alliance motion')}
         size='large'
       >
         <Modal.Content>
@@ -157,7 +157,7 @@ function Add ({ className, isMember, members }: Props): React.ReactElement<Props
           <TxButton
             accountId={accountId}
             isDisabled={!accountId}
-            label={t<string>('Add')}
+            label={t<string>('Propose')}
             onStart={toggleVisible}
             params={[propose]}
             tx={api.tx.alliance.propose}

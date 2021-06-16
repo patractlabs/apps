@@ -42,7 +42,7 @@ function Propose ({ className = '', isMember, members }: Props): React.ReactElem
     />
     {isVisible && (
       <Modal
-        header={t<string>('Propose announcement')}
+        header={t<string>('Propose an alliance motion')}
         size='large'
       >
         <Modal.Content>

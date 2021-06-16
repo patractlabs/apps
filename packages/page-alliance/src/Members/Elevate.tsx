@@ -40,11 +40,11 @@ function Elevate ({ address, className, members, onClose }: Props): React.ReactE
       </Modal.Columns>
       <Modal.Columns hint={t<string>('The account will elevate to fellow.')}>
         <InputAddress
+          defaultValue={address}
           help={t<string>('xxx')}
           isDisabled
           label={t<string>('xxx')}
           type='allPlus'
-          value={address}
         />
       </Modal.Columns>
     </Modal.Content>

@@ -45,7 +45,7 @@ function Remove ({ accountBlacklist, className, isMember, members, websiteBlackl
     />
     {isVisible && (
       <Modal
-        header={t<string>('Remove blacklist')}
+        header={t<string>('Propose an alliance motion')}
         size='large'
       >
         <Modal.Content>
@@ -93,7 +93,7 @@ function Remove ({ accountBlacklist, className, isMember, members, websiteBlackl
           <TxButton
             accountId={accountId}
             isDisabled={!accountId || (accounts.length + websites.length === 0)}
-            label={t<string>('Remove')}
+            label={t<string>('Propose')}
             onStart={toggleVisible}
             params={[proposal]}
             tx={api.tx.alliance.propose}

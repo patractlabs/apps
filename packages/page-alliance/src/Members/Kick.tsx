@@ -40,11 +40,11 @@ function Kick ({ address, className, members, onClose }: Props): React.ReactElem
       </Modal.Columns>
       <Modal.Columns hint={t<string>('The account will be kick out.')}>
         <InputAddress
+          defaultValue={address}
           help={t<string>('xxx')}
           isDisabled
           label={t<string>('xxx')}
           type='allPlus'
-          value={address}
         />
       </Modal.Columns>
     </Modal.Content>
