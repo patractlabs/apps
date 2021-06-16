@@ -31,7 +31,7 @@ function Nominate ({ className, isMember, members }: Props): React.ReactElement<
     />
     {isVisible && (
       <Modal
-        header={t<string>('Nominate candidacy')}
+        header={t<string>('Propose an nominate candidacy')}
         size='large'
       >
         <Modal.Content>
@@ -57,7 +57,7 @@ function Nominate ({ className, isMember, members }: Props): React.ReactElement<
           <TxButton
             accountId={accountId}
             isDisabled={!accountId}
-            label={t<string>('Nominate candidacy')}
+            label={t<string>('Submit proposal')}
             onStart={toggleVisible}
             params={[nominator]}
             tx={api.tx.alliance.nominateCandidacy}

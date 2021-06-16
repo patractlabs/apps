@@ -55,11 +55,11 @@ function Propose ({ className = '', isMember, members }: Props): React.ReactElem
               type='account'
             />
           </Modal.Columns>
-          <Modal.Columns hint={t<string>('Ipfs Hash')}>
+          <Modal.Columns hint={t<string>('IPFS Hash')}>
             <Input
-              help={t<string>('Ipfs hash')}
+              help={t<string>('IPFS hash')}
               isError={!hashEncode}
-              label={t<string>('Ipfs hash')}
+              label={t<string>('IPFS hash')}
               onChange={setHash}
             />
           </Modal.Columns>

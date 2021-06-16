@@ -34,7 +34,7 @@ function Rule ({ members, onClose }: Props): React.ReactElement<Props> {
 
   return (
     <Modal
-      header={t<string>('Set rule')}
+      header={t<string>('Propose setting rule')}
       size='large'
     >
       <Modal.Content>
@@ -47,11 +47,11 @@ function Rule ({ members, onClose }: Props): React.ReactElement<Props> {
             type='account'
           />
         </Modal.Columns>
-        <Modal.Columns hint={t<string>('Ipfs Hash')}>
+        <Modal.Columns hint={t<string>('IPFS Hash')}>
           <Input
-            help={t<string>('Ipfs hash')}
+            help={t<string>('IPFS hash')}
             isError={!ruleEncode}
-            label={t<string>('Ipfs hash')}
+            label={t<string>('IPFS hash')}
             onChange={setRule}
           />
         </Modal.Columns>
@@ -60,7 +60,7 @@ function Rule ({ members, onClose }: Props): React.ReactElement<Props> {
         <TxButton
           accountId={accountId}
           isDisabled={!accountId || !ruleEncode}
-          label={t<string>('Set rule')}
+          label={t<string>('Submit proposal')}
           onStart={onClose}
           params={[propose]}
           tx={api.tx.alliance.propose}

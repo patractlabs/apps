@@ -51,6 +51,16 @@ function AddItem ({ index, onChange, value }: ItemProps): React.ReactElement<Ite
 
   return <Columar>
     <Columar.Column>
+      <Dropdown
+        className={'ui--DropdownLinked-Sections'}
+        label={t<string>('Select type')}
+        onChange={_typeChange}
+        options={options}
+        value={_type}
+        withLabel
+      />
+    </Columar.Column>
+    <Columar.Column>
       {_type === 'Website'
         ? <Input
           defaultValue={_value}
@@ -62,16 +72,6 @@ function AddItem ({ index, onChange, value }: ItemProps): React.ReactElement<Ite
           label={t<string>('address {{index}}', { replace: { index: index + 1 } })}
           onChange={_valueChange}
         />}
-    </Columar.Column>
-    <Columar.Column>
-      <Dropdown
-        className={'ui--DropdownLinked-Sections'}
-        label={t<string>('Select type')}
-        onChange={_typeChange}
-        options={options}
-        value={_type}
-        withLabel
-      />
     </Columar.Column>
   </Columar>;
 }
@@ -115,7 +115,7 @@ function Add ({ className, isMember, members }: Props): React.ReactElement<Props
     />
     {isVisible && (
       <Modal
-        header={t<string>('Propose an alliance motion')}
+        header={t<string>('Propose blacklist')}
         size='large'
       >
         <Modal.Content>
@@ -157,7 +157,7 @@ function Add ({ className, isMember, members }: Props): React.ReactElement<Props
           <TxButton
             accountId={accountId}
             isDisabled={!accountId}
-            label={t<string>('Propose')}
+            label={t<string>('Submit proposal')}
             onStart={toggleVisible}
             params={[propose]}
             tx={api.tx.alliance.propose}

@@ -24,7 +24,7 @@ function Kick ({ address, className, members, onClose }: Props): React.ReactElem
 
   return <Modal
     className={className}
-    header={t<string>('Submit kicking proposal')}
+    header={t<string>('Propose kicking out')}
     size='large'
   >
     <Modal.Content>

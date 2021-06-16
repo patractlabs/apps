@@ -24,7 +24,7 @@ function Elevate ({ address, className, members, onClose }: Props): React.ReactE
 
   return <Modal
     className={className}
-    header={t<string>('Elevate to fellow')}
+    header={t<string>('Propose elevate to fellow')}
     size='large'
   >
     <Modal.Content>

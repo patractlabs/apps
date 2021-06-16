@@ -5,6 +5,7 @@ import React, { useCallback, useMemo } from 'react';
 
 import { AddressSmall, Button, Menu, Popup } from '@polkadot/react-components';
 import { useAccounts, useToggle } from '@polkadot/react-hooks';
+import { FormatBalance } from '@polkadot/react-query';
 
 import { useTranslation } from '../translate';
 import { useDeposit } from '../useDeposit';
@@ -78,9 +79,7 @@ function Ally ({ ally, className, isMember, members, onRetire }: Props): React.R
         </a>
       </td>
       <td className='start'>
-        {
-          deposite
-        }
+        <FormatBalance value={deposite} />
       </td>
       <td className='button'>
         <Popup

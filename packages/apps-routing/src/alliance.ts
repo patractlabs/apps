@@ -13,7 +13,7 @@ export default function create (t: TFunction): Route {
       needsApi: []
     },
     group: 'governance',
-    icon: 'star-of-david',
+    icon: 'atom',
     name: 'alliance',
     text: t('nav.alliance', 'Alliance', {
       ns: 'apps-routing'

@@ -10,12 +10,16 @@ import { useCidEncode } from '../useCid';
 interface Props {
   className?: string
   announcement: Cid;
+  index: number;
 }
 
-function Announcement ({ announcement, className }: Props): React.ReactElement<Props> {
+function Announcement ({ announcement, className, index }: Props): React.ReactElement<Props> {
   const hash = useCidEncode(announcement);
 
   return <tr className={className}>
+    <td style={{ width: '20%' }}>
+      {index}
+    </td>
     <td>
       <a href={hash ? `https://ipfs.io/ipfs/${hash}` : undefined}
         rel='noopener noreferrer'

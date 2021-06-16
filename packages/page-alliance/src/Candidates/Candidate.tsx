@@ -4,6 +4,7 @@
 import React from 'react';
 
 import { AddressSmall } from '@polkadot/react-components';
+import { FormatBalance } from '@polkadot/react-query';
 
 import { useDeposit } from '../useDeposit';
 import { useWebsite } from '../useWebsite';
@@ -34,9 +35,7 @@ function Candidate ({ candidate, className, isMember, members }: Props): React.R
       </a>
     </td>
     <td className='start'>
-      {
-        deposite
-      }
+      <FormatBalance value={deposite} />
     </td>
     <td className='button'>
       <Propose

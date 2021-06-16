@@ -22,7 +22,8 @@ function Announcements ({ announcements, isMember, members }: Props): React.Reac
   const { t } = useTranslation();
 
   const header = useMemo(() => [
-    [t('Announcements'), 'start']
+    [t('Announcements'), 'start'],
+    [t('IPFS Hash'), 'start']
   ], [t]);
 
   return <>
@@ -36,8 +37,9 @@ function Announcements ({ announcements, isMember, members }: Props): React.Reac
       empty={t<string>('No announcements')}
       header={header}
     >
-      {announcements.map((announcement) => <Announcement
+      {announcements.map((announcement, index) => <Announcement
         announcement={announcement}
+        index={index}
         key={announcement.toHex()}
       />)}
     </Table>

@@ -30,11 +30,6 @@ function Remove ({ accountBlacklist, className, isMember, members, websiteBlackl
     )
   ), [accounts, api.tx.alliance, websites]);
 
-  websiteBlacklist = [
-    'https:fdsf',
-    'ipfs://eyru'
-  ];
-
   return <>
     <Button
       className={className}
@@ -45,7 +40,7 @@ function Remove ({ accountBlacklist, className, isMember, members, websiteBlackl
     />
     {isVisible && (
       <Modal
-        header={t<string>('Propose an alliance motion')}
+        header={t<string>('Propose blacklist')}
         size='large'
       >
         <Modal.Content>
@@ -64,21 +59,6 @@ function Remove ({ accountBlacklist, className, isMember, members, websiteBlackl
               <p>{t<string>('xxx')}</p>
             </>
           }>
-            <InputAddressMulti
-              available={accountBlacklist}
-              availableLabel={t<string>('account blacklist')}
-              help={t<string>('xxx')}
-              maxCount={10}
-              onChange={setAccounts}
-              valueLabel={t<string>('selected')}
-            />
-          </Modal.Columns>
-          <Modal.Columns hint={
-            <>
-              <p>{t<string>('xxx')}</p>
-              <p>{t<string>('xxx')}</p>
-            </>
-          }>
             <InputTextMulti
               available={websiteBlacklist}
               availableLabel={t<string>('website blacklist')}
@@ -88,12 +68,27 @@ function Remove ({ accountBlacklist, className, isMember, members, websiteBlackl
               valueLabel={t<string>('selected')}
             />
           </Modal.Columns>
+          <Modal.Columns hint={
+            <>
+              <p>{t<string>('xxx')}</p>
+              <p>{t<string>('xxx')}</p>
+            </>
+          }>
+            <InputAddressMulti
+              available={accountBlacklist}
+              availableLabel={t<string>('account blacklist')}
+              help={t<string>('xxx')}
+              maxCount={10}
+              onChange={setAccounts}
+              valueLabel={t<string>('selected')}
+            />
+          </Modal.Columns>
         </Modal.Content>
         <Modal.Actions onCancel={toggleVisible}>
           <TxButton
             accountId={accountId}
             isDisabled={!accountId || (accounts.length + websites.length === 0)}
-            label={t<string>('Propose')}
+            label={t<string>('Submit proposal')}
             onStart={toggleVisible}
             params={[proposal]}
             tx={api.tx.alliance.propose}
