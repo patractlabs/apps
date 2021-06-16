@@ -10,7 +10,7 @@ import { useMemo } from 'react';
 import { useApi } from '@polkadot/react-hooks';
 
 export function useCidEncode (cid?: Cid | null): string | null {
-  if (!cid) {
+  if (!cid || cid.isEmpty) {
     return null;
   }
 
