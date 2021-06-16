@@ -10,9 +10,10 @@ import { useTranslation } from '../translate';
 
 interface Props {
   className?: string;
+  isMember: boolean;
 }
 
-function Nominate ({ className }: Props): React.ReactElement<Props> {
+function Nominate ({ className, isMember }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { api } = useApi();
   const [isVisible, toggleVisible] = useToggle();
@@ -23,6 +24,7 @@ function Nominate ({ className }: Props): React.ReactElement<Props> {
     <Button
       className={className}
       icon='plus'
+      isDisabled={!isMember}
       label={t<string>('Nominate candidacy')}
       onClick={toggleVisible}
     />

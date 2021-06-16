@@ -12,9 +12,10 @@ import Remove from './Remove';
 interface Props {
   accountBlacklist: string[];
   websiteBlacklist: string[];
+  isMember: boolean;
 }
 
-function Blacklist ({ accountBlacklist, websiteBlacklist }: Props): React.ReactElement<Props> {
+function Blacklist ({ accountBlacklist, isMember, websiteBlacklist }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
 
   const accountHeader = useMemo(() => [
@@ -26,9 +27,10 @@ function Blacklist ({ accountBlacklist, websiteBlacklist }: Props): React.ReactE
 
   return <>
     <Button.Group>
-      <Add />
+      <Add isMember={isMember} />
       <Remove
         accountBlacklist={accountBlacklist}
+        isMember={isMember}
         websiteBlacklist={websiteBlacklist}
       />
     </Button.Group>

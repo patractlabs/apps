@@ -16,7 +16,7 @@ interface Props {
   toggleFavorite: (address: string) => void;
 }
 
-function Candidate ({ candidate, className, isFavorite, toggleFavorite }: Props): React.ReactElement<Props> {
+function Candidate ({ candidate, className, isFavorite, isMember, toggleFavorite }: Props): React.ReactElement<Props> {
   const website = useWebsite(candidate);
 
   const _onFavorite = useCallback(() => toggleFavorite(candidate), [candidate, toggleFavorite]);
@@ -40,7 +40,10 @@ function Candidate ({ candidate, className, isFavorite, toggleFavorite }: Props)
       </a>
     </td>
     <td className='button'>
-      <Propose candidate={candidate} />
+      <Propose
+        candidate={candidate}
+        isMember={isMember}
+      />
     </td>
   </tr>;
 }

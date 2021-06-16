@@ -12,9 +12,10 @@ interface Props {
   className?: string;
   accountBlacklist: string[];
   websiteBlacklist: string[];
+  isMember: boolean;
 }
 
-function Remove ({ accountBlacklist, className, websiteBlacklist }: Props): React.ReactElement<Props> {
+function Remove ({ accountBlacklist, className, isMember, websiteBlacklist }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { api } = useApi();
   const [isVisible, toggleVisible] = useToggle();
@@ -37,6 +38,7 @@ function Remove ({ accountBlacklist, className, websiteBlacklist }: Props): Reac
     <Button
       className={className}
       icon='minus'
+      isDisabled={!isMember}
       label={t<string>('Remove blacklist')}
       onClick={toggleVisible}
     />

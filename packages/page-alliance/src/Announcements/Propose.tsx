@@ -10,10 +10,11 @@ import { useTranslation } from '../translate';
 import { useCidDecode } from '../useCid';
 
 interface Props {
-  className?: string
+  className?: string;
+  isMember: boolean;
 }
 
-function Propose ({ className = '' }: Props): React.ReactElement<Props> {
+function Propose ({ className = '', isMember }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const [isVisible, toggleVisible] = useToggle();
   const [accountId, setAccountId] = useState<string | null>(null);
@@ -34,6 +35,7 @@ function Propose ({ className = '' }: Props): React.ReactElement<Props> {
     <Button
       className={className}
       icon='plus'
+      isDisabled={!isMember}
       label={t<string>('Propose Announcement')}
       onClick={toggleVisible}
     />

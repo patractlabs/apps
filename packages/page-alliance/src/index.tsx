@@ -91,6 +91,7 @@ function AllianceApp ({ basePath, className }: Props): React.ReactElement<Props>
         <Route path={`${basePath}/blacklist`}>
           <Blacklist
             accountBlacklist={accountBlacklist?.map((account) => account.toString()) || []}
+            isMember={isMember}
             websiteBlacklist={websiteBlacklist?.map((website) => website.toString()) || []}
           />
         </Route>
@@ -105,6 +106,7 @@ function AllianceApp ({ basePath, className }: Props): React.ReactElement<Props>
         <Route path={`${basePath}/announcements`}>
           <Announcements
             announcements={announcements?.map((announcement) => announcement) || []}
+            isMember={isMember}
           />
         </Route>
         <Route path={`${basePath}/motions`}>

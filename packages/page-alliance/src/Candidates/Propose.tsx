@@ -11,9 +11,10 @@ import { useTranslation } from '../translate';
 interface Props {
   className?: string;
   candidate: string;
+  isMember: boolean;
 }
 
-function Propose ({ candidate }: Props): React.ReactElement<Props> {
+function Propose ({ candidate, isMember }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { api } = useApi();
   const [isVisible, toggleVisible] = useToggle();
@@ -25,6 +26,7 @@ function Propose ({ candidate }: Props): React.ReactElement<Props> {
   return <>
     <Button
       icon='paper-plane'
+      isDisabled={!isMember}
       label={t<string>('Propose')}
       onClick={toggleVisible}
     />

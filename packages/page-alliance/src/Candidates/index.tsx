@@ -30,7 +30,7 @@ function Candidates ({ candidates, favorites, isMember, toggleFavorite }: Props)
   return <>
     <Button.Group>
       <Submit />
-      <Nominate />
+      <Nominate isMember={isMember} />
     </Button.Group>
     <Table
       empty={t<string>('No candidates')}

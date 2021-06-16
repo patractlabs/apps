@@ -11,6 +11,7 @@ import { useTranslation } from '../translate';
 
 interface Props {
   className?: string;
+  isMember: boolean;
 }
 
 interface ItemProps {
@@ -74,7 +75,7 @@ function AddItem ({ index, onChange, value }: ItemProps): React.ReactElement<Ite
   </Columar>;
 }
 
-function Add ({ className }: Props): React.ReactElement<Props> {
+function Add ({ className, isMember }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { api } = useApi();
   const [isVisible, toggleVisible] = useToggle();
@@ -107,6 +108,7 @@ function Add ({ className }: Props): React.ReactElement<Props> {
     <Button
       className={className}
       icon='plus'
+      isDisabled={!isMember}
       label={t<string>('Add blacklist')}
       onClick={toggleVisible}
     />
