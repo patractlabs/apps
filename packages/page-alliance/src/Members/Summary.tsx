@@ -3,7 +3,8 @@
 
 import React, { useMemo } from 'react';
 
-import { Table } from '@polkadot/react-components';
+import { Button, Menu, Popup, Table } from '@polkadot/react-components';
+import { useToggle } from '@polkadot/react-hooks';
 
 import { useTranslation } from '../translate';
 import Rule from './Rule';
@@ -17,35 +18,76 @@ interface Props {
 
 function Summary ({ className, isMember, members, rule }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
+  const [isMenuOpen, toggleMenu] = useToggle();
+  const [isSetRuleOpen, toggleSetRule] = useToggle();
 
   const header = useMemo(() => [
     [t<string>('Alliance rule')],
     []
   ], [t]);
 
-  return <Table
-    className={className}
-    empty={t<string>('No rule')}
-    header={header}
-  >
-    <tr>
-      <td className='start'>
-        <a
-          href={rule ? `https://ipfs.io/ipfs/${rule}` : ''}
-          rel='noopener noreferrer'
-          target='_blank'
-        >
-          {rule}
-        </a>
-      </td>
-      <td className='button'>
-        <Rule
-          isMember={isMember}
-          members={members}
-        />
-      </td>
-    </tr>
-  </Table>;
+  const menuItems = useMemo(() => {
+    const items = [];
+
+    if (isMember) {
+      items.push(<Menu.Item
+        key='set-rule'
+        onClick={toggleSetRule}
+      >
+        {t('Set Rule')}
+      </Menu.Item>);
+    }
+
+    return items;
+  }, [isMember, t, toggleSetRule]);
+
+  return (
+    <Table
+      className={className}
+      empty={t<string>('No rule')}
+      header={header}
+    >
+      <tr>
+        <td className='start'>
+          <a
+            href={rule ? `https://ipfs.io/ipfs/${rule}` : ''}
+            rel='noopener noreferrer'
+            target='_blank'
+          >
+            {rule}
+          </a>
+        </td>
+        <td className='button'>
+          <Popup
+            isOpen={isMenuOpen}
+            onClose={toggleMenu}
+            trigger={
+              <Button
+                icon='ellipsis-v'
+                isDisabled={!menuItems.length}
+                onClick={toggleMenu}
+              />
+            }
+          >
+            <Menu
+              onClick={toggleMenu}
+              text
+              vertical
+            >
+              {menuItems}
+            </Menu>
+          </Popup>
+        </td>
+      </tr>
+      {
+        isSetRuleOpen &&
+          <Rule
+            isMember={isMember}
+            members={members}
+            onClose={toggleSetRule} />
+      }
+    </Table>
+  );
 }
 
 export default React.memo(Summary);
