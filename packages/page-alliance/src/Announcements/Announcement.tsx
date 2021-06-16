@@ -17,7 +17,9 @@ function Announcement ({ announcement, className }: Props): React.ReactElement<P
 
   return <tr className={className}>
     <td>
-      {hash}
+      <a href={hash ? `https://ipfs.io/ipfs/${hash}` : undefined}
+        rel='noopener noreferrer'
+        target='_blank'>{hash}</a>
     </td>
   </tr>;
 }

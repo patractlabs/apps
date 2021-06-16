@@ -50,6 +50,7 @@ function Rule ({ members, onClose }: Props): React.ReactElement<Props> {
         <Modal.Columns hint={t<string>('Ipfs Hash')}>
           <Input
             help={t<string>('Ipfs hash')}
+            isError={!ruleEncode}
             label={t<string>('Ipfs hash')}
             onChange={setRule}
           />

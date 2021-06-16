@@ -58,6 +58,7 @@ function Propose ({ className = '', isMember, members }: Props): React.ReactElem
           <Modal.Columns hint={t<string>('Ipfs Hash')}>
             <Input
               help={t<string>('Ipfs hash')}
+              isError={!hashEncode}
               label={t<string>('Ipfs hash')}
               onChange={setHash}
             />
