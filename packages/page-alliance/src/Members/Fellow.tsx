@@ -4,7 +4,7 @@
 import React, { useCallback, useMemo } from 'react';
 
 import { AddressSmall, Button, Menu, Popup } from '@polkadot/react-components';
-import { useToggle } from '@polkadot/react-hooks';
+import { useAccounts, useToggle } from '@polkadot/react-hooks';
 
 import { useTranslation } from '../translate';
 import { useWebsite } from '../useWebsite';
@@ -24,16 +24,21 @@ function Fellow ({ className, fellow, isMember, onRetire }: Props): React.ReactE
   const website = useWebsite(fellow);
   const [isMenuOpen, toggleMenu] = useToggle();
   const [isKickOpen, toggleKick] = useToggle();
+  const { allAccounts } = useAccounts();
 
   const _onRetire = useCallback(() => onRetire(fellow), [fellow, onRetire]);
 
   const menuItems = useMemo(() => {
-    const items = [<Menu.Item
-      key='retire'
-      onClick={_onRetire}
-    >
-      {t('Retire')}
-    </Menu.Item>];
+    const items = [];
+
+    if (allAccounts.includes(fellow)) {
+      items.push(<Menu.Item
+        key='retire'
+        onClick={_onRetire}
+      >
+        {t('Retire')}
+      </Menu.Item>);
+    }
 
     if (isMember) {
       items.push(<Menu.Item
@@ -45,7 +50,7 @@ function Fellow ({ className, fellow, isMember, onRetire }: Props): React.ReactE
     }
 
     return items;
-  }, [_onRetire, isMember, t, toggleKick]);
+  }, [_onRetire, allAccounts, fellow, isMember, t, toggleKick]);
 
   return <>
     <tr className={className}>

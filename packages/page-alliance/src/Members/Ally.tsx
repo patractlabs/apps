@@ -4,10 +4,11 @@
 import React, { useCallback, useMemo } from 'react';
 
 import { AddressSmall, Button, Menu, Popup } from '@polkadot/react-components';
-import { useToggle } from '@polkadot/react-hooks';
+import { useAccounts, useToggle } from '@polkadot/react-hooks';
 
 import { useTranslation } from '../translate';
 import { useWebsite } from '../useWebsite';
+import Elevate from './Elevate';
 import Kick from './Kick';
 
 interface Props {
@@ -24,28 +25,42 @@ function Ally ({ ally, className, isMember, onRetire }: Props): React.ReactEleme
   const website = useWebsite(ally);
   const [isMenuOpen, toggleMenu] = useToggle();
   const [isKickOpen, toggleKick] = useToggle();
+  const [isElevateOpen, toggleElevate] = useToggle();
+  const { allAccounts } = useAccounts();
 
   const _onRetire = useCallback(() => onRetire(ally), [ally, onRetire]);
 
   const menuItems = useMemo(() => {
-    const items = [<Menu.Item
-      key='retire'
-      onClick={_onRetire}
-    >
-      {t('Retire')}
-    </Menu.Item>];
+    const items = [];
 
-    if (isMember) {
+    if (allAccounts.includes(ally)) {
       items.push(<Menu.Item
-        key='kicking out'
-        onClick={toggleKick}
+        key='retire'
+        onClick={_onRetire}
       >
-        {t('Propose kicking out')}
+        {t('Retire')}
       </Menu.Item>);
     }
 
+    if (isMember) {
+      items.push(
+        <Menu.Item
+          key='kicking out'
+          onClick={toggleKick}
+        >
+          {t('Propose kicking out')}
+        </Menu.Item>,
+        <Menu.Item
+          key='elevate to fellow'
+          onClick={toggleElevate}
+        >
+          {t('Propose elevate to fellow')}
+        </Menu.Item>
+      );
+    }
+
     return items;
-  }, [_onRetire, isMember, t, toggleKick]);
+  }, [_onRetire, allAccounts, ally, isMember, t, toggleElevate, toggleKick]);
 
   return <>
     <tr className={className}>
@@ -83,7 +98,13 @@ function Ally ({ ally, className, isMember, onRetire }: Props): React.ReactEleme
     </tr>
     {isKickOpen && <Kick
       address={ally}
+      key='kick'
       onClose={toggleKick}
+    />}
+    {isElevateOpen && <Elevate
+      address={ally}
+      key='elevate'
+      onClose={toggleElevate}
     />}
   </>;
 }
