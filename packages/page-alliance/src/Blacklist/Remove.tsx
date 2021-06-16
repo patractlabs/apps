@@ -28,6 +28,11 @@ function Remove ({ accountBlacklist, className, websiteBlacklist }: Props): Reac
     )
   ), [accounts, api.tx.alliance, websites]);
 
+  websiteBlacklist = [
+    'https:fdsf',
+    'ipfs://eyru'
+  ];
+
   return <>
     <Button
       className={className}

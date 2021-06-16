@@ -57,6 +57,7 @@ export { default as InputNumber } from './InputNumber';
 export { default as InputRpc } from './InputRpc';
 export { default as InputStorage } from './InputStorage';
 export { default as InputTags } from './InputTags';
+export { default as InputTextMulti } from './InputTextMulti';
 export { default as InputWasm } from './InputWasm';
 export { default as Inset } from './Inset';
 export { default as Label } from './Label';

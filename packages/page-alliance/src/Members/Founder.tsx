@@ -4,7 +4,7 @@
 import React, { useCallback, useMemo } from 'react';
 
 import { AddressSmall, Button, Menu, Popup } from '@polkadot/react-components';
-import { useToggle } from '@polkadot/react-hooks';
+import { useAccounts, useToggle } from '@polkadot/react-hooks';
 
 import { useTranslation } from '../translate';
 import { useWebsite } from '../useWebsite';
@@ -24,16 +24,21 @@ function Founder ({ className, founder, isMember, onRetire }: Props): React.Reac
   const website = useWebsite(founder);
   const [isMenuOpen, toggleMenu] = useToggle();
   const [isKickOpen, toggleKick] = useToggle();
+  const { allAccounts } = useAccounts();
 
   const _onRetire = useCallback(() => onRetire(founder), [founder, onRetire]);
 
   const menuItems = useMemo(() => {
-    const items = [<Menu.Item
-      key='retire'
-      onClick={_onRetire}
-    >
-      {t('Retire')}
-    </Menu.Item>];
+    const items = [];
+
+    if (allAccounts.includes(founder)) {
+      items.push(<Menu.Item
+        key='retire'
+        onClick={_onRetire}
+      >
+        {t('Retire')}
+      </Menu.Item>);
+    }
 
     if (isMember) {
       items.push(<Menu.Item
@@ -45,7 +50,7 @@ function Founder ({ className, founder, isMember, onRetire }: Props): React.Reac
     }
 
     return items;
-  }, [_onRetire, isMember, t, toggleKick]);
+  }, [_onRetire, allAccounts, founder, isMember, t, toggleKick]);
 
   return <>
     <tr className={className}>
