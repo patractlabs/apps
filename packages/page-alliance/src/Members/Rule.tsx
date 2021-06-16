@@ -66,7 +66,7 @@ function Rule ({ className = '', isMember, members }: Props): React.ReactElement
         <Modal.Actions onCancel={toggleVisible}>
           <TxButton
             accountId={accountId}
-            isDisabled={!accountId || !rule}
+            isDisabled={!accountId || !ruleEncode}
             label={t<string>('Set rule')}
             onStart={toggleVisible}
             params={[propose]}

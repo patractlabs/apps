@@ -66,7 +66,7 @@ function Propose ({ className = '', isMember, members }: Props): React.ReactElem
         <Modal.Actions onCancel={toggleVisible}>
           <TxButton
             accountId={accountId}
-            isDisabled={!accountId || !hash}
+            isDisabled={!accountId || !hashEncode}
             label={t<string>('Propose')}
             onStart={toggleVisible}
             params={[propose]}
