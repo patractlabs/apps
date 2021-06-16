@@ -23,8 +23,8 @@ function Founder ({ className, founder, isMember, onRetire }: Props): React.Reac
   const { t } = useTranslation();
   const website = useWebsite(founder);
   const [isMenuOpen, toggleMenu] = useToggle();
+  const [isKickOpen, toggleKick] = useToggle();
 
-  // const _onFavorite = useCallback(() => toggleFavorite(founder), [founder, toggleFavorite]);
   const _onRetire = useCallback(() => onRetire(founder), [founder, onRetire]);
 
   const menuItems = useMemo(() => {
@@ -36,48 +36,56 @@ function Founder ({ className, founder, isMember, onRetire }: Props): React.Reac
     </Menu.Item>];
 
     if (isMember) {
-      items.push(<Kick
-        address={founder}
+      items.push(<Menu.Item
         key='kicking out'
-      />);
+        onClick={toggleKick}
+      >
+        {t('Propose kicking out')}
+      </Menu.Item>);
     }
 
     return items;
-  }, [_onRetire, founder, isMember, t]);
+  }, [_onRetire, isMember, t, toggleKick]);
 
-  return <tr className={className}>
-    <td className='address'><AddressSmall value={founder} /></td>
-    <td className='start'>
-      <a
-        href={website}
-        rel='noopener noreferrer'
-        target='_blank'
-      >
-        {website}
-      </a>
-    </td>
-    <td className='button'>
-      <Popup
-        isOpen={isMenuOpen}
-        onClose={toggleMenu}
-        trigger={
-          <Button
-            icon='ellipsis-v'
-            isDisabled={!menuItems.length}
-            onClick={toggleMenu}
-          />
-        }
-      >
-        <Menu
-          onClick={toggleMenu}
-          text
-          vertical
+  return <>
+    <tr className={className}>
+      <td className='address'><AddressSmall value={founder} /></td>
+      <td className='start'>
+        <a
+          href={website}
+          rel='noopener noreferrer'
+          target='_blank'
         >
-          {menuItems}
-        </Menu>
-      </Popup>
-    </td>
-  </tr>;
+          {website}
+        </a>
+      </td>
+      <td className='button'>
+        <Popup
+          isOpen={isMenuOpen}
+          onClose={toggleMenu}
+          trigger={
+            <Button
+              icon='ellipsis-v'
+              isDisabled={!menuItems.length}
+              onClick={toggleMenu}
+            />
+          }
+        >
+          <Menu
+            onClick={toggleMenu}
+            text
+            vertical
+          >
+            {menuItems}
+          </Menu>
+        </Popup>
+      </td>
+    </tr>
+    {isKickOpen && <Kick
+      address={founder}
+      onClose={toggleKick}
+    />}
+  </>;
 }
 
 export default React.memo(Founder);

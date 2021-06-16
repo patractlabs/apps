@@ -23,6 +23,7 @@ function Ally ({ ally, className, isMember, onRetire }: Props): React.ReactEleme
   const { t } = useTranslation();
   const website = useWebsite(ally);
   const [isMenuOpen, toggleMenu] = useToggle();
+  const [isKickOpen, toggleKick] = useToggle();
 
   const _onRetire = useCallback(() => onRetire(ally), [ally, onRetire]);
 
@@ -35,48 +36,56 @@ function Ally ({ ally, className, isMember, onRetire }: Props): React.ReactEleme
     </Menu.Item>];
 
     if (isMember) {
-      items.push(<Kick
-        address={ally}
+      items.push(<Menu.Item
         key='kicking out'
-      />);
+        onClick={toggleKick}
+      >
+        {t('Propose kicking out')}
+      </Menu.Item>);
     }
 
     return items;
-  }, [_onRetire, ally, isMember, t]);
+  }, [_onRetire, isMember, t, toggleKick]);
 
-  return <tr className={className}>
-    <td className='address'><AddressSmall value={ally} /></td>
-    <td className='start'>
-      <a
-        href={website}
-        rel='noopener noreferrer'
-        target='_blank'
-      >
-        {website}
-      </a>
-    </td>
-    <td className='button'>
-      <Popup
-        isOpen={isMenuOpen}
-        onClose={toggleMenu}
-        trigger={
-          <Button
-            icon='ellipsis-v'
-            isDisabled={!menuItems.length}
-            onClick={toggleMenu}
-          />
-        }
-      >
-        <Menu
-          onClick={toggleMenu}
-          text
-          vertical
+  return <>
+    <tr className={className}>
+      <td className='address'><AddressSmall value={ally} /></td>
+      <td className='start'>
+        <a
+          href={website}
+          rel='noopener noreferrer'
+          target='_blank'
         >
-          {menuItems}
-        </Menu>
-      </Popup>
-    </td>
-  </tr>;
+          {website}
+        </a>
+      </td>
+      <td className='button'>
+        <Popup
+          isOpen={isMenuOpen}
+          onClose={toggleMenu}
+          trigger={
+            <Button
+              icon='ellipsis-v'
+              isDisabled={!menuItems.length}
+              onClick={toggleMenu}
+            />
+          }
+        >
+          <Menu
+            onClick={toggleMenu}
+            text
+            vertical
+          >
+            {menuItems}
+          </Menu>
+        </Popup>
+      </td>
+    </tr>
+    {isKickOpen && <Kick
+      address={ally}
+      onClose={toggleKick}
+    />}
+  </>;
 }
 
 export default React.memo(Ally);

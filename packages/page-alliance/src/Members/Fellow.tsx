@@ -23,6 +23,7 @@ function Fellow ({ className, fellow, isMember, onRetire }: Props): React.ReactE
   const { t } = useTranslation();
   const website = useWebsite(fellow);
   const [isMenuOpen, toggleMenu] = useToggle();
+  const [isKickOpen, toggleKick] = useToggle();
 
   const _onRetire = useCallback(() => onRetire(fellow), [fellow, onRetire]);
 
@@ -35,48 +36,56 @@ function Fellow ({ className, fellow, isMember, onRetire }: Props): React.ReactE
     </Menu.Item>];
 
     if (isMember) {
-      items.push(<Kick
-        address={fellow}
+      items.push(<Menu.Item
         key='kicking out'
-      />);
+        onClick={toggleKick}
+      >
+        {t('Propose kicking out')}
+      </Menu.Item>);
     }
 
     return items;
-  }, [_onRetire, fellow, isMember, t]);
+  }, [_onRetire, isMember, t, toggleKick]);
 
-  return <tr className={className}>
-    <td className='address'><AddressSmall value={fellow} /></td>
-    <td className='start'>
-      <a
-        href={website}
-        rel='noopener noreferrer'
-        target='_blank'
-      >
-        {website}
-      </a>
-    </td>
-    <td className='button'>
-      <Popup
-        isOpen={isMenuOpen}
-        onClose={toggleMenu}
-        trigger={
-          <Button
-            icon='ellipsis-v'
-            isDisabled={!menuItems.length}
-            onClick={toggleMenu}
-          />
-        }
-      >
-        <Menu
-          onClick={toggleMenu}
-          text
-          vertical
+  return <>
+    <tr className={className}>
+      <td className='address'><AddressSmall value={fellow} /></td>
+      <td className='start'>
+        <a
+          href={website}
+          rel='noopener noreferrer'
+          target='_blank'
         >
-          {menuItems}
-        </Menu>
-      </Popup>
-    </td>
-  </tr>;
+          {website}
+        </a>
+      </td>
+      <td className='button'>
+        <Popup
+          isOpen={isMenuOpen}
+          onClose={toggleMenu}
+          trigger={
+            <Button
+              icon='ellipsis-v'
+              isDisabled={!menuItems.length}
+              onClick={toggleMenu}
+            />
+          }
+        >
+          <Menu
+            onClick={toggleMenu}
+            text
+            vertical
+          >
+            {menuItems}
+          </Menu>
+        </Popup>
+      </td>
+    </tr>
+    {isKickOpen && <Kick
+      address={fellow}
+      onClose={toggleKick}
+    />}
+  </>;
 }
 
 export default React.memo(Fellow);
