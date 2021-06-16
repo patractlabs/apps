@@ -11,9 +11,10 @@ import Rule from './Rule';
 interface Props {
   className?: string;
   rule: string | null;
+  isMember: boolean;
 }
 
-function Summary ({ className, rule }: Props): React.ReactElement<Props> {
+function Summary ({ className, isMember, rule }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
 
   const header = useMemo(() => [
@@ -37,7 +38,7 @@ function Summary ({ className, rule }: Props): React.ReactElement<Props> {
         </a>
       </td>
       <td className='button'>
-        <Rule />
+        <Rule isMember={isMember} />
       </td>
     </tr>
   </Table>;

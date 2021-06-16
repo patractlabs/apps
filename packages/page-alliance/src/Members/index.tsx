@@ -41,6 +41,7 @@ function Members ({ allies, className = '', favorites, fellows, founders, isMemb
   return (
     <div className={className}>
       <Summary
+        isMember={isMember}
         rule={rule}
       />
       <Founders

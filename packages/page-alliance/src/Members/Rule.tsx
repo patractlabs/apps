@@ -11,9 +11,10 @@ import { useCidDecode } from '../useCid';
 
 interface Props {
   className?: string
+  isMember: boolean;
 }
 
-function Rule ({ className = '' }: Props): React.ReactElement<Props> {
+function Rule ({ className = '', isMember }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const [isVisible, toggleVisible] = useToggle();
   const [accountId, setAccountId] = useState<string | null>(null);
@@ -34,6 +35,7 @@ function Rule ({ className = '' }: Props): React.ReactElement<Props> {
     <Button
       className={className}
       icon='plus'
+      isDisabled={!isMember}
       label={t<string>('Set Rule')}
       onClick={toggleVisible}
     />
