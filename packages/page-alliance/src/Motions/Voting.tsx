@@ -58,7 +58,7 @@ function Voting ({ hash, idNumber, isDisabled, members, proposal }: Props): Reac
               label={t<string>('Vote Nay')}
               onStart={toggleVoting}
               params={[hash, idNumber, false]}
-              tx={api.tx.allianceMotion.vote}
+              tx={api.tx.alliance.vote}
             />
             <TxButton
               accountId={accountId}
@@ -67,7 +67,7 @@ function Voting ({ hash, idNumber, isDisabled, members, proposal }: Props): Reac
               label={t<string>('Vote Aye')}
               onStart={toggleVoting}
               params={[hash, idNumber, true]}
-              tx={api.tx.allianceMotion.vote}
+              tx={api.tx.alliance.vote}
             />
           </Modal.Actions>
         </Modal>

@@ -69,7 +69,11 @@ function Fellow ({ className, fellow, isMember, members, onRetire }: Props): Rea
         </a>
       </td>
       <td className='start'>
-        <FormatBalance value={deposite} />
+        {
+          deposite
+            ? <FormatBalance value={deposite} />
+            : '-'
+        }
       </td>
       <td className='button'>
         <Popup

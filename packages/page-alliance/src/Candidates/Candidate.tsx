@@ -35,7 +35,11 @@ function Candidate ({ candidate, className, isMember, members }: Props): React.R
       </a>
     </td>
     <td className='start'>
-      <FormatBalance value={deposite} />
+      {
+        deposite
+          ? <FormatBalance value={deposite} />
+          : '-'
+      }
     </td>
     <td className='button'>
       <Propose

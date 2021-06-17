@@ -79,7 +79,11 @@ function Ally ({ ally, className, isMember, members, onRetire }: Props): React.R
         </a>
       </td>
       <td className='start'>
-        <FormatBalance value={deposite} />
+        {
+          deposite
+            ? <FormatBalance value={deposite} />
+            : '-'
+        }
       </td>
       <td className='button'>
         <Popup

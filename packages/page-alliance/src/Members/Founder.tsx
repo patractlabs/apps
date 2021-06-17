@@ -69,7 +69,11 @@ function Founder ({ className, founder, isMember, members, onRetire }: Props): R
         </a>
       </td>
       <td className='start'>
-        <FormatBalance value={deposite} />
+        {
+          deposite
+            ? <FormatBalance value={deposite} />
+            : '-'
+        }
       </td>
       <td className='button'>
         <Popup

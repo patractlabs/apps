@@ -39,6 +39,7 @@
   "everything": "everything",
   "extrinsic hash": "extrinsic hash",
   "filter by name, address, or account index": "filter by name, address, or account index",
+  "filter by name, text, or text index": "filter by name, text, or text index",
   "lifetime": "lifetime",
   "lock expired": "lock expired",
   "locked": "locked",
