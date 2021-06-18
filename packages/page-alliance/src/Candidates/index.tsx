@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import React, { useMemo } from 'react';
+import styled from 'styled-components';
 
 import { Button, Table } from '@polkadot/react-components';
 
@@ -19,17 +20,17 @@ interface Props {
   toggleFavorite: (address: string) => void;
 }
 
-function Candidates ({ candidates, favorites, isMember, members, toggleFavorite }: Props): React.ReactElement<Props> {
+function Candidates ({ candidates, className = '', favorites, isMember, members, toggleFavorite }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
 
   const header = useMemo(() => [
-    [t('Candidates'), 'start'],
-    [t('Website'), 'start'],
-    [t('Deposit'), 'start'],
+    [t('Candidates'), 'start account'],
+    [t('Website'), 'start website'],
+    [t('Deposit'), 'start deposite'],
     [undefined, undefined]
   ], [t]);
 
-  return <>
+  return <div className={className}>
     <Button.Group>
       <Submit />
       <Nominate
@@ -50,7 +51,19 @@ function Candidates ({ candidates, favorites, isMember, members, toggleFavorite 
         toggleFavorite={toggleFavorite}
       />)}
     </Table>
-  </>;
+  </div>;
 }
 
-export default React.memo(Candidates);
+export default React.memo(styled(Candidates)`
+  tr .account {
+    width: 40%;
+  }
+
+  tr .website {
+    width: 32%;
+  }
+
+  tr .deposite {
+    width: 17%;
+  }
+`);

@@ -12,6 +12,7 @@ import { useApi } from '@polkadot/react-hooks';
 import Allies from './Allies';
 import Fellows from './Fellows';
 import Founders from './Founders';
+import Rules from './Rules';
 import Summary from './Summary';
 
 interface Props {
@@ -42,6 +43,11 @@ function Members ({ allies, className = '', favorites, fellows, founders, isMemb
   return (
     <div className={className}>
       <Summary
+        allies={allies.length}
+        fellows={fellows.length}
+        founders={founders.length}
+      />
+      <Rules
         isMember={isMember}
         members={members}
         rule={rule}

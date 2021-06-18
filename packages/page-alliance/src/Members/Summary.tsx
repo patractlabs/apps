@@ -1,92 +1,38 @@
-// Copyright 2017-2021 @polkadot/app-alliance authors & contributors
+// Copyright 2017-2021 @polkadot/app-explorer authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import React, { useMemo } from 'react';
+import React from 'react';
 
-import { Button, Menu, Popup, Table } from '@polkadot/react-components';
-import { useToggle } from '@polkadot/react-hooks';
+import { CardSummary, SummaryBox } from '@polkadot/react-components';
+import { formatNumber } from '@polkadot/util';
 
 import { useTranslation } from '../translate';
-import Rule from './Rule';
 
 interface Props {
-  className?: string;
-  rule: string | null;
-  isMember: boolean;
-  members: string[];
+  founders: number;
+  fellows: number;
+  allies: number;
 }
 
-function Summary ({ className, isMember, members, rule }: Props): React.ReactElement<Props> {
+function Summary ({ allies, fellows, founders }: Props): React.ReactElement<Props> | null {
   const { t } = useTranslation();
-  const [isMenuOpen, toggleMenu] = useToggle();
-  const [isSetRuleOpen, toggleSetRule] = useToggle();
-
-  const header = useMemo(() => [
-    [t<string>('Alliance rule')],
-    []
-  ], [t]);
-
-  const menuItems = useMemo(() => {
-    const items = [];
-
-    if (isMember) {
-      items.push(<Menu.Item
-        key='set-rule'
-        onClick={toggleSetRule}
-      >
-        {t('Set Rule')}
-      </Menu.Item>);
-    }
-
-    return items;
-  }, [isMember, t, toggleSetRule]);
 
   return (
-    <Table
-      className={className}
-      empty={t<string>('No rule')}
-      header={header}
-    >
-      <tr>
-        <td className='start'>
-          <a
-            href={rule ? `https://ipfs.io/ipfs/${rule}` : ''}
-            rel='noopener noreferrer'
-            target='_blank'
-          >
-            {rule}
-          </a>
-        </td>
-        <td className='button'>
-          <Popup
-            isOpen={isMenuOpen}
-            onClose={toggleMenu}
-            trigger={
-              <Button
-                icon='ellipsis-v'
-                isDisabled={!menuItems.length}
-                onClick={toggleMenu}
-              />
-            }
-          >
-            <Menu
-              onClick={toggleMenu}
-              text
-              vertical
-            >
-              {menuItems}
-            </Menu>
-          </Popup>
-        </td>
-      </tr>
-      {
-        isSetRuleOpen &&
-          <Rule
-            isMember={isMember}
-            members={members}
-            onClose={toggleSetRule} />
-      }
-    </Table>
+    <SummaryBox>
+      <section>
+        <>
+          <CardSummary label={t<string>('founders')}>
+            {formatNumber(founders)}
+          </CardSummary>
+          <CardSummary label={t<string>('fellows')}>
+            {formatNumber(fellows)}
+          </CardSummary>
+          <CardSummary label={t<string>('allies')}>
+            {formatNumber(allies)}
+          </CardSummary>
+        </>
+      </section>
+    </SummaryBox>
   );
 }
 

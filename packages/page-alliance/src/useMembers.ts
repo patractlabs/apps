@@ -31,6 +31,8 @@ export function useMembers (): Result {
     count: (founders?.length || 0) + (fellows?.length || 0) + (allies?.length || 0),
     fellows: fellows || [],
     founders: founders || [],
+    isFellow: (fellows || []).some((accountId) => allAccounts.includes(accountId)),
+    isFounder: (founders || []).some((accountId) => allAccounts.includes(accountId)),
     isMember: (founders || []).concat(fellows || []).some((accountId) => allAccounts.includes(accountId))
   }), [allAccounts, allies, fellows, founders]);
 }
