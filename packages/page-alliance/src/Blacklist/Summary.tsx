@@ -2,26 +2,34 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import React from 'react';
+import styled from 'styled-components';
 
 import { CardSummary, SummaryBox } from '@polkadot/react-components';
 
 import { useTranslation } from '../translate';
 
 interface Props {
+  className?: string;
   accountBlacklist: string[];
   websiteBlacklist: string[];
 }
 
-function Summary ({ accountBlacklist, websiteBlacklist }: Props): React.ReactElement<Props> {
+function Summary ({ accountBlacklist, className = '', websiteBlacklist }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
 
   return (
-    <SummaryBox>
+    <SummaryBox className={className}>
       <section>
-        <CardSummary label={t<string>('Accounts')}>
+        <CardSummary
+          className='summary-card'
+          label={t<string>('Accounts')}
+        >
           {accountBlacklist.length}
         </CardSummary>
-        <CardSummary label={t<string>('Websites')}>
+        <CardSummary
+          className='summary-card'
+          label={t<string>('Websites')}
+        >
           {websiteBlacklist.length}
         </CardSummary>
       </section>
@@ -29,4 +37,13 @@ function Summary ({ accountBlacklist, websiteBlacklist }: Props): React.ReactEle
   );
 }
 
-export default React.memo(Summary);
+export default React.memo(styled(Summary)`
+  & section {
+    width: 100%;
+
+    .summary-card {
+      min-width: 50%;
+      justify-content: flex-start;
+    }
+  }
+`);

@@ -9,6 +9,8 @@ import { useApi, useToggle } from '@polkadot/react-hooks';
 
 import { useTranslation } from '../translate';
 
+type BlackListType = 'Website' | 'AccountId';
+
 interface Props {
   className?: string;
   isMember: boolean;
@@ -17,8 +19,14 @@ interface Props {
 
 interface ItemProps {
   index: number;
-  value: Record<string, string | null>
-  onChange: (value: Record<string, string | null>) => void;
+  value: BlackListValue;
+  onChange: (value: BlackListValue) => void;
+}
+
+interface BlackListValue {
+  value: string;
+  type: BlackListType;
+  valid: boolean;
 }
 
 function AddItem ({ index, onChange, value }: ItemProps): React.ReactElement<ItemProps> {
@@ -34,57 +42,72 @@ function AddItem ({ index, onChange, value }: ItemProps): React.ReactElement<Ite
     value: 'AccountId'
   }], []);
 
-  const _type = useMemo(() => {
-    return Object.keys(value)[0];
-  }, [value]);
-  const _value = useMemo(() => {
-    return value[_type];
-  }, [_type, value]);
+  const onValueChange = useCallback((newValue: string | null) => {
+    const valid = value.type === 'Website'
+      ? !!(['https://', 'http://'].find((prefix) => newValue?.startsWith(prefix)))
+      : true;
 
-  const _valueChange = useCallback((value: string | null) => {
-    onChange({ [_type]: value });
-  }, [_type, onChange]);
+    onChange({
+      type: value.type,
+      valid,
+      value: newValue || ''
+    });
+  }, [onChange, value.type]);
 
-  const _typeChange = useCallback((type: 'AccountId' | 'Website') => {
-    onChange({ [type]: null });
-  }, [onChange]);
+  const onTypeChange = useCallback((type: BlackListType) => {
+    if (type !== value.type) {
+      onChange({
+        type,
+        valid: false,
+        value: ''
+      });
+    }
+  }, [onChange, value.type]);
 
   return <Columar>
     <Columar.Column>
       <Dropdown
         className={'ui--DropdownLinked-Sections'}
         label={t<string>('Select type')}
-        onChange={_typeChange}
+        onChange={onTypeChange}
         options={options}
-        value={_type}
+        value={value.type}
         withLabel
       />
     </Columar.Column>
     <Columar.Column>
-      {_type === 'Website'
-        ? <Input
-          defaultValue={_value}
-          label={t<string>('website {{index}}', { replace: { index: index + 1 } })}
-          onChange={_valueChange}
-        />
-        : <InputAddress
-          defaultValue={_value}
-          label={t<string>('address {{index}}', { replace: { index: index + 1 } })}
-          onChange={_valueChange}
-        />}
+      {
+        value.type === 'Website'
+          ? <Input
+            defaultValue={value.value}
+            isError={!value.valid}
+            label={t<string>('website {{index}}', { replace: { index: index + 1 } })}
+            maxLength={32}
+            onChange={onValueChange}
+            placeholder={t('https://example.com')}
+          />
+          : <InputAddress
+            defaultValue={value.value}
+            isError={!value.value}
+            label={t<string>('address {{index}}', { replace: { index: index + 1 } })}
+            onChange={onValueChange}
+          />
+      }
     </Columar.Column>
   </Columar>;
 }
+
+const InitialValue: BlackListValue = { type: 'Website', valid: false, value: '' };
 
 function Add ({ className, isMember, members }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { api } = useApi();
   const [isVisible, toggleVisible] = useToggle();
   const [accountId, setAccountId] = useState<string | null>(null);
-  const [blacklists, setBlacklists] = useState<Record<string, string | null>[]>([{ Website: null }]);
+  const [blacklists, setBlacklists] = useState<BlackListValue[]>([InitialValue]);
 
   const _rowAdd = useCallback(
-    () => setBlacklists((_blacklists) => _blacklists.concat([{ Website: null }])),
+    () => setBlacklists((_blacklists) => _blacklists.concat([InitialValue])),
     []
   );
 
@@ -94,16 +117,22 @@ function Add ({ className, isMember, members }: Props): React.ReactElement<Props
   );
 
   const propose = useMemo(() => api.tx.alliance.addBlacklist(blacklists.map((blacklist) => {
-    if (Object.keys(blacklist)[0] === 'Website') {
+    if (blacklist.type === 'Website') {
       return {
-        Website: api.registry.createType('Bytes', blacklist.Website)
+        Website: api.registry.createType('Bytes', blacklist.value)
       };
     } else {
       return {
-        AccountId: blacklist.AccountId
+        AccountId: blacklist.value
       };
     }
   })), [api.registry, api.tx.alliance, blacklists]);
+
+  const isValid = useMemo(
+    () => blacklists.every((item) => item.valid) &&
+      (new Set(blacklists.map((item) => item.value))).size === blacklists.length,
+    [blacklists]
+  );
 
   return <>
     <Button
@@ -156,7 +185,7 @@ function Add ({ className, isMember, members }: Props): React.ReactElement<Props
         <Modal.Actions onCancel={toggleVisible}>
           <TxButton
             accountId={accountId}
-            isDisabled={!accountId}
+            isDisabled={!accountId || !isValid}
             label={t<string>('Submit proposal')}
             onStart={toggleVisible}
             params={[propose]}

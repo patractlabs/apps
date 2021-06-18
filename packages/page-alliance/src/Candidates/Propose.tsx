@@ -35,7 +35,7 @@ function Propose ({ candidate, isMember, members }: Props): React.ReactElement<P
 
   return <>
     <Button
-      icon='paper-plane'
+      icon='step-forward'
       isDisabled={!isMember}
       label={t<string>('Propose')}
       onClick={toggleVisible}

@@ -13,6 +13,8 @@ interface Result {
   fellows: string[];
   founders: string[]
   isMember: boolean;
+  isFellow: boolean;
+  isFounder: boolean;
 }
 
 const transformMembers = {

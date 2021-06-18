@@ -24,8 +24,10 @@ function Motions ({ className, isMember, members, motions }: Props): React.React
     [t('motions'), 'start', 2],
     [t('threshold')],
     [t('voting end')],
+    [t('votes')],
+    [undefined, undefined],
     [],
-    [undefined, undefined]
+    [undefined, undefined, undefined]
   ], [t]);
 
   return <Table
