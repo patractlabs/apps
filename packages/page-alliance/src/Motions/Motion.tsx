@@ -1,26 +1,27 @@
 // Copyright 2017-2021 @polkadot/app-alliance authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import type { SubmittableExtrinsic } from '@polkadot/api/types';
 import type { DeriveCollectiveProposal } from '@polkadot/api-derive/types';
 
-import React, { useCallback, useContext, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 import ProposalCell from '@polkadot/app-democracy/Overview/ProposalCell';
-import { Button, Icon, Menu, Popup, StatusContext, TxButton } from '@polkadot/react-components';
+import { Button, Icon, Menu, Popup, TxButton } from '@polkadot/react-components';
 import { useAccounts, useApi, useToggle, useVotingStatus, useWeight } from '@polkadot/react-hooks';
 import { BlockToTime } from '@polkadot/react-query';
 import { formatNumber } from '@polkadot/util';
 
 import { useTranslation } from '../translate';
-import { useMembers } from '../useMembers';
 import Close from './Close';
+import Veto from './Veto';
 import Voters from './Voters';
 import Voting from './Voting';
 
 interface Props {
   className?: string;
   isMember: boolean;
+  isFounder: boolean;
+  founders: string[];
   members: string[];
   motion: DeriveCollectiveProposal;
 }
@@ -30,38 +31,32 @@ interface VoterState {
   hasVotedAye: boolean;
 }
 
-function Motion ({ className = '', isMember, members, motion: { hash, proposal, votes } }: Props): React.ReactElement<Props> | null {
+function Motion ({ className = '', founders, isFounder, isMember, members, motion: { hash, proposal, votes } }: Props): React.ReactElement<Props> | null {
   const { t } = useTranslation();
   const { api } = useApi();
-  const { queueExtrinsic } = useContext(StatusContext);
   const { allAccounts } = useAccounts();
-  const { isFounder } = useMembers();
   const [isMenuOpen, toggleMenu] = useToggle();
+  const [isVetoOpen, toggleVeto] = useToggle();
   const { isCloseable, isVoteable, remainingBlocks } = useVotingStatus(votes, members.length, 'alliance');
   const [proposalWeight, proposalLength] = useWeight(proposal);
-
-  const onVeto = useCallback(() => {
-    const extrinsic: SubmittableExtrinsic<'promise'> = api.tx.alliance.veto(proposal.hash);
-
-    queueExtrinsic({
-      extrinsic
-    });
-  }, [api.tx.alliance, proposal.hash, queueExtrinsic]);
 
   const menuItems = useMemo(() => {
     const items = [];
 
-    if (isFounder) {
+    if (isFounder &&
+      proposal.section.toLowerCase() === 'alliance' &&
+      (proposal.method.toLowerCase() === 'elevateally' || proposal.method.toLowerCase() === 'setrule')
+    ) {
       items.push(<Menu.Item
         key='veto'
-        onClick={onVeto}
+        onClick={toggleVeto}
       >
         {t('veto')}
       </Menu.Item>);
     }
 
     return items;
-  }, [isFounder, onVeto, t]);
+  }, [isFounder, t, toggleVeto, proposal]);
 
   const [memberId, isMultiMembers] = useMemo(
     (): [string | null, boolean] => {
@@ -187,6 +182,14 @@ function Motion ({ className = '', isMember, members, motion: { hash, proposal, 
             </Popup>
         }
       </td>
+      {
+        isVetoOpen &&
+          <Veto
+            founders={founders}
+            onClose={toggleVeto}
+            proposal={proposal}
+          />
+      }
     </tr>
   );
 }

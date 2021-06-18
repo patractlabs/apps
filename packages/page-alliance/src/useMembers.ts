@@ -11,7 +11,7 @@ interface Result {
   allies: string[];
   count: number;
   fellows: string[];
-  founders: string[]
+  founders: string[];
   isMember: boolean;
   isFellow: boolean;
   isFounder: boolean;

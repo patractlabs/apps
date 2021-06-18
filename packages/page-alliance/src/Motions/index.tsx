@@ -8,6 +8,7 @@ import React, { useMemo } from 'react';
 import { Table } from '@polkadot/react-components';
 
 import { useTranslation } from '../translate';
+import { useMembers } from '../useMembers';
 import Motion from './Motion';
 
 interface Props {
@@ -19,6 +20,7 @@ interface Props {
 
 function Motions ({ className, isMember, members, motions }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
+  const { founders, isFounder } = useMembers();
 
   const header = useMemo(() => [
     [t('motions'), 'start', 2],
@@ -37,6 +39,8 @@ function Motions ({ className, isMember, members, motions }: Props): React.React
   >
     {motions?.map((motion: DeriveCollectiveProposal): React.ReactNode => (
       <Motion
+        founders={founders}
+        isFounder={isFounder}
         isMember={isMember}
         key={motion.hash.toHex()}
         members={members}

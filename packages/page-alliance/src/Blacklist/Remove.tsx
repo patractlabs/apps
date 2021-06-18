@@ -59,12 +59,12 @@ function Remove ({ accountBlacklist, className, isMember, members, websiteBlackl
               <p>{t<string>('xxx')}</p>
             </>
           }>
-            <InputTextMulti
-              available={websiteBlacklist}
-              availableLabel={t<string>('website blacklist')}
+            <InputAddressMulti
+              available={accountBlacklist}
+              availableLabel={t<string>('account blacklist')}
               help={t<string>('xxx')}
               maxCount={10}
-              onChange={setWebsites}
+              onChange={setAccounts}
               valueLabel={t<string>('selected')}
             />
           </Modal.Columns>
@@ -74,12 +74,12 @@ function Remove ({ accountBlacklist, className, isMember, members, websiteBlackl
               <p>{t<string>('xxx')}</p>
             </>
           }>
-            <InputAddressMulti
-              available={accountBlacklist}
-              availableLabel={t<string>('account blacklist')}
+            <InputTextMulti
+              available={websiteBlacklist}
+              availableLabel={t<string>('website blacklist')}
               help={t<string>('xxx')}
               maxCount={10}
-              onChange={setAccounts}
+              onChange={setWebsites}
               valueLabel={t<string>('selected')}
             />
           </Modal.Columns>
