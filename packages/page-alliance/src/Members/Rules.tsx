@@ -58,25 +58,27 @@ function Rules ({ className, isMember, members, rule }: Props): React.ReactEleme
           </a>
         </td>
         <td className='button'>
-          <Popup
-            isOpen={isMenuOpen}
-            onClose={toggleMenu}
-            trigger={
-              <Button
-                icon='ellipsis-v'
-                isDisabled={!menuItems.length}
-                onClick={toggleMenu}
-              />
-            }
-          >
-            <Menu
-              onClick={toggleMenu}
-              text
-              vertical
-            >
-              {menuItems}
-            </Menu>
-          </Popup>
+          {
+            !!menuItems.length &&
+              <Popup
+                isOpen={isMenuOpen}
+                onClose={toggleMenu}
+                trigger={
+                  <Button
+                    icon='ellipsis-v'
+                    onClick={toggleMenu}
+                  />
+                }
+              >
+                <Menu
+                  onClick={toggleMenu}
+                  text
+                  vertical
+                >
+                  {menuItems}
+                </Menu>
+              </Popup>
+          }
         </td>
       </tr>
       {
