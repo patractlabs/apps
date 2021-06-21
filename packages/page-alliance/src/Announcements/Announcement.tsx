@@ -34,7 +34,7 @@ function Announcement ({ announcement, className, index }: Props): React.ReactEl
 }
 
 export default React.memo(styled(Announcement)`
-  tr td .item {
+  .item {
     height: 26px;
     line-height: 26px;
   }
