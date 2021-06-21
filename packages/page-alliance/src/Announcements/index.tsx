@@ -41,7 +41,7 @@ function Announcements ({ announcements: announcementsSource, isMember, members 
       {announcements.map((announcement, index) => <Announcement
         announcement={announcement}
         index={index}
-        key={announcement.toHex()}
+        key={index}
       />)}
     </Table>
   </>;

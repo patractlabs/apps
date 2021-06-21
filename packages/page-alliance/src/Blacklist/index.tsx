@@ -4,12 +4,12 @@
 import React, { useMemo, useState } from 'react';
 import styled from 'styled-components';
 
-import { AddressSmall, Button, Columar, Input, Table } from '@polkadot/react-components';
+import { Button, Columar, Input, Table } from '@polkadot/react-components';
 
 import { useTranslation } from '../translate';
+import Account from './Account';
 import Add from './Add';
 import Remove from './Remove';
-// import Summary from './Summary';
 
 interface Props {
   className?: string;
@@ -25,10 +25,6 @@ function getFiltered (list: string[], filter: string): string[] {
   }
 
   return list.filter((item) => {
-    // if (Number(filter) === index) {
-    //   return true;
-    // }
-
     if (item.includes(filter)) {
       return true;
     }
@@ -39,6 +35,7 @@ function getFiltered (list: string[], filter: string): string[] {
 
 function Blacklist ({ accountBlacklist, className = '', isMember, members, websiteBlacklist }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
+
   const [accountFilter, setAccountFilter] = useState<string>('');
   const [websiteFilter, setWebsiteFilter] = useState<string>('');
 
@@ -49,14 +46,10 @@ function Blacklist ({ accountBlacklist, className = '', isMember, members, websi
     [t<string>('Websites')]
   ], [t]);
 
-  const _accountBlacklist = useMemo(() => getFiltered(accountBlacklist, accountFilter), [accountBlacklist, accountFilter]);
   const _websiteBlacklist = useMemo(() => getFiltered(websiteBlacklist, websiteFilter), [websiteBlacklist, websiteFilter]);
 
   return <div className={className}>
-    {/* <Summary
-      accountBlacklist={accountBlacklist}
-      websiteBlacklist={websiteBlacklist}
-    /> */}
+
     <Button.Group>
       <Add
         isMember={isMember}
@@ -81,11 +74,15 @@ function Blacklist ({ accountBlacklist, className = '', isMember, members, websi
           />}
           header={accountHeader}
         >
-          {_accountBlacklist.map((account) => <tr key={account}>
-            <td>
-              <AddressSmall value={account} />
-            </td>
-          </tr>)}
+          {
+            accountBlacklist.map((account, index) =>
+              <Account
+                account={account}
+                filter={accountFilter}
+                key={`${index}:${account}`}
+              />
+            )
+          }
         </Table>
       </Columar.Column>
       <Columar.Column>
