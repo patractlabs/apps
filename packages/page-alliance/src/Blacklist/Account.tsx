@@ -9,17 +9,19 @@ import { useAccountInfo } from '@polkadot/react-hooks';
 interface Props {
   account: string;
   filter: string;
+  index: number;
 }
 
-function Account ({ account, filter }: Props): React.ReactElement<Props> | null {
+function Account ({ account, filter, index }: Props): React.ReactElement<Props> | null {
   const { identity, name } = useAccountInfo(account);
 
   const visible = useMemo(() =>
     !filter ||
+    filter === `${index}` ||
     name.toLowerCase().includes(filter.toLowerCase()) ||
     account.toLowerCase().includes(filter.toLowerCase()) ||
     (identity && identity.display?.toLocaleLowerCase().includes(filter.toLocaleLowerCase())),
-  [account, filter, identity, name]
+  [account, filter, index, identity, name]
   );
 
   if (!visible) {

@@ -18,7 +18,7 @@ function Announcement ({ announcement, className, index }: Props): React.ReactEl
   const hash = useCidEncode(announcement);
 
   return <tr className={className}>
-    <td style={{ width: '20%' }}>
+    <td style={{ width: '10%' }}>
       <div className='item'>
         {index}
       </div>

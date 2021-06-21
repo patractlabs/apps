@@ -68,7 +68,7 @@ function Blacklist ({ accountBlacklist, className = '', isMember, members, websi
           empty={t<string>('Account blacklist empty')}
           filter={<Input
             isFull
-            label={t<string>('filter by address or identity')}
+            label={t<string>('Filter by name, address or index.')}
             onChange={setAccountFilter}
             value={accountFilter}
           />}
@@ -79,6 +79,7 @@ function Blacklist ({ accountBlacklist, className = '', isMember, members, websi
               <Account
                 account={account}
                 filter={accountFilter}
+                index={index}
                 key={`${index}:${account}`}
               />
             )
