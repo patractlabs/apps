@@ -12,10 +12,14 @@ interface Props {
 }
 
 function Account ({ account, filter }: Props): React.ReactElement<Props> | null {
-  const { name } = useAccountInfo(account);
+  const { identity, name } = useAccountInfo(account);
 
   const visible = useMemo(() =>
-    !filter || name.toLowerCase().includes(filter.toLowerCase()) || account.toLowerCase().includes(filter.toLowerCase()), [account, filter, name]
+    !filter ||
+    name.toLowerCase().includes(filter.toLowerCase()) ||
+    account.toLowerCase().includes(filter.toLowerCase()) ||
+    (identity && identity.display?.toLocaleLowerCase().includes(filter.toLocaleLowerCase())),
+  [account, filter, identity, name]
   );
 
   if (!visible) {
