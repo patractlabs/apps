@@ -2320,8 +2320,8 @@ __metadata:
   resolution: "@polkadot/app-alliance@workspace:packages/page-alliance"
   dependencies:
     "@babel/runtime": ^7.14.0
-    "@polkadot/react-components": ^0.93.2-11
-    "@polkadot/react-query": ^0.93.2-11
+    "@polkadot/react-components": ^0.93.2-25
+    "@polkadot/react-query": ^0.93.2-25
     cids: ^1.1.6
   languageName: unknown
   linkType: soft
