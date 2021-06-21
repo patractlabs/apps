@@ -13784,7 +13784,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"multibase@npm:^1.0.0, multibase@npm:^1.0.1":
+"multibase@npm:^1.0.0":
   version: 1.0.1
   resolution: "multibase@npm:1.0.1"
   dependencies:
@@ -13852,18 +13852,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"multihashes@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "multihashes@npm:1.0.1"
-  dependencies:
-    buffer: ^5.6.0
-    multibase: ^1.0.1
-    varint: ^5.0.0
-  checksum: 21e338dfb23900f7c038ac708fab598b33bc3d8d02f636ff753969c575b934f979dec76936ca142c6fd126a8bd030f7f391a44a3681c92cab28311c8b0b70589
-  languageName: node
-  linkType: hard
-
-"multihashes@npm:^4.0.1":
+"multihashes@npm:^4.0.2":
   version: 4.0.2
   resolution: "multihashes@npm:4.0.2"
   dependencies:
@@ -13871,17 +13860,6 @@ fsevents@~2.1.2:
     uint8arrays: ^2.1.3
     varint: ^5.0.2
   checksum: 506fcbc3e59638e3509900beb34f490bfb5bf19bcce338f55e7c908d93d5358a6a0876a3275f8d07d9e5a7a5368e1d598a0d5359fa3d6003116977b4e1e306f8
-  languageName: node
-  linkType: hard
-
-"multihashes@npm:~0.4.13, multihashes@npm:~0.4.15":
-  version: 0.4.21
-  resolution: "multihashes@npm:0.4.21"
-  dependencies:
-    buffer: ^5.5.0
-    multibase: ^0.7.0
-    varint: ^5.0.0
-  checksum: 688731560cf7384e899dc75c0da51e426eb7d058c5ea5eb57b224720a1108deb8797f1cd7f45599344d512d2877de99dd6a7b7773a095812365dea4ffe6ebd4c
   languageName: node
   linkType: hard
 
