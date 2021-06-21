@@ -139,20 +139,20 @@ function Add ({ className, isMember, members }: Props): React.ReactElement<Props
       className={className}
       icon='plus'
       isDisabled={!isMember}
-      label={t<string>('Add blacklist')}
+      label={t<string>('Propose adding')}
       onClick={toggleVisible}
     />
     {isVisible && (
       <Modal
-        header={t<string>('Propose blacklist')}
+        header={t<string>('propose adding blacklist items')}
         size='large'
       >
         <Modal.Content>
-          <Modal.Columns hint={t<string>('xxx')}>
+          <Modal.Columns hint={t<string>('The alliance founder or fellow accounts for the proposal. The selection is filtered by the current accounts with proposing rights.')}>
             <InputAddress
               filter={members}
-              help={t<string>('xxx')}
-              label={t<string>('xxx')}
+              help={t<string>('Select the account you wish to submit the proposal from.')}
+              label={t<string>('propose from account')}
               onChange={setAccountId}
               type='account'
             />

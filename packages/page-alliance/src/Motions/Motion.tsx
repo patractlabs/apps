@@ -51,7 +51,7 @@ function Motion ({ className = '', founders, isFounder, isMember, members, motio
         key='veto'
         onClick={toggleVeto}
       >
-        {t('veto')}
+        {t('Veto')}
       </Menu.Item>);
     }
 
@@ -186,6 +186,7 @@ function Motion ({ className = '', founders, isFounder, isMember, members, motio
         isVetoOpen &&
           <Veto
             founders={founders}
+            idNumber={index}
             onClose={toggleVeto}
             proposal={proposal}
           />

@@ -31,23 +31,23 @@ function Nominate ({ className, isMember, members }: Props): React.ReactElement<
     />
     {isVisible && (
       <Modal
-        header={t<string>('Propose an nominate candidacy')}
+        header={t<string>('nominate an alliance candidacy')}
         size='large'
       >
         <Modal.Content>
-          <Modal.Columns hint={t<string>('xxx')}>
+          <Modal.Columns hint={t<string>('The alliance founder or fellow accounts for the proposal. The selection is filtered by the current accounts with proposing rights.')}>
             <InputAddress
               filter={members}
-              help={t<string>('This account will be use to nominate candidacy.')}
-              label={t<string>('Nominate account')}
+              help={t<string>('Select the account you wish to submit the nomination from.')}
+              label={t<string>('submit with account')}
               onChange={setAccountId}
               type='account'
             />
           </Modal.Columns>
-          <Modal.Columns hint={t<string>('xxx')}>
+          <Modal.Columns hint={t<string>('This account will be nominated as a candidate without the need of deposit compared with submitting candidacy by itself.')}>
             <InputAddress
-              help={t<string>('xxx')}
-              label={t<string>('Nominator')}
+              help={t<string>('The account you wish to be nominated to candidate.')}
+              label={t<string>('candidate account')}
               onChange={setNominator}
               type='account'
             />

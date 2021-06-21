@@ -35,49 +35,43 @@ function Remove ({ accountBlacklist, className, isMember, members, websiteBlackl
       className={className}
       icon='minus'
       isDisabled={!isMember}
-      label={t<string>('Remove blacklist')}
+      label={t<string>('Propose removing')}
       onClick={toggleVisible}
     />
     {isVisible && (
       <Modal
-        header={t<string>('Propose blacklist')}
+        header={t<string>('propose removing blacklist items')}
         size='large'
       >
         <Modal.Content>
-          <Modal.Columns hint={t<string>('xxx')}>
+          <Modal.Columns hint={t<string>('The alliance founder or fellow accounts for the proposal. The selection is filtered by the current accounts with proposing rights.')}>
             <InputAddress
               filter={members}
-              help={t<string>('xxx')}
-              label={t<string>('xxx')}
+              help={t<string>('Select the account you wish to submit the proposal from.')}
+              label={t<string>('propose from account')}
               onChange={setAccountId}
               type='account'
             />
           </Modal.Columns>
           <Modal.Columns hint={
-            <>
-              <p>{t<string>('xxx')}</p>
-              <p>{t<string>('xxx')}</p>
-            </>
+            <p>{t<string>('Accounts can be selected manually from the list of all current accounts.')}</p>
           }>
             <InputAddressMulti
               available={accountBlacklist}
               availableLabel={t<string>('account blacklist')}
-              help={t<string>('xxx')}
+              help={t<string>('All accounts selected will be removed from blacklist, no priority.')}
               maxCount={10}
               onChange={setAccounts}
               valueLabel={t<string>('selected')}
             />
           </Modal.Columns>
           <Modal.Columns hint={
-            <>
-              <p>{t<string>('xxx')}</p>
-              <p>{t<string>('xxx')}</p>
-            </>
+            <p>{t<string>('Websites can be selected manually from the list of all current websites.')}</p>
           }>
             <InputTextMulti
               available={websiteBlacklist}
               availableLabel={t<string>('website blacklist')}
-              help={t<string>('xxx')}
+              help={t<string>('All websites selected will be removed from blacklist, no priority. ')}
               maxCount={10}
               onChange={setWebsites}
               valueLabel={t<string>('selected')}

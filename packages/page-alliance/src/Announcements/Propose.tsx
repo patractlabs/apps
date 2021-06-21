@@ -42,20 +42,20 @@ function Propose ({ className = '', isMember, members }: Props): React.ReactElem
     />
     {isVisible && (
       <Modal
-        header={t<string>('Propose an alliance motion')}
+        header={t<string>('propose an announcement')}
         size='large'
       >
         <Modal.Content>
-          <Modal.Columns hint={t<string>('The vote will be recorded for the selected account.')}>
+          <Modal.Columns hint={t<string>('The alliance founder or fellow accounts for the proposal. The selection is filtered by the current accounts with proposing rights.')}>
             <InputAddress
               filter={members}
               help={t<string>('This account will be use to propose announce.')}
-              label={t<string>('propose account')}
+              label={t<string>('Propose from account')}
               onChange={setAccountId}
               type='account'
             />
           </Modal.Columns>
-          <Modal.Columns hint={t<string>('IPFS Hash')}>
+          <Modal.Columns hint={t<string>('The IPFS hash of the announcement, better be formatted in a single Markdown document.')}>
             <Input
               help={t<string>('IPFS hash')}
               isError={!hashEncode}

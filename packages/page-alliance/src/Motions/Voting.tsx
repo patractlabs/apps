@@ -33,7 +33,7 @@ function Voting ({ hash, idNumber, isDisabled, members, proposal }: Props): Reac
     <>
       {isVotingOpen && (
         <Modal
-          header={t<string>('Vote on proposal')}
+          header={t<string>('vote on proposal')}
           size='large'
         >
           <Modal.Content>
@@ -43,7 +43,7 @@ function Voting ({ hash, idNumber, isDisabled, members, proposal }: Props): Reac
                 proposal={proposal}
               />
             </Modal.Columns>
-            <Modal.Columns hint={t<string>('The alliance member account for this vote. The selection is filtered by the current members.')}>
+            <Modal.Columns hint={t<string>('The alliance founder or fellow accounts for this vote. The selection is filtered by the current accounts with proposing rights.')}>
               <VoteAccount
                 filter={members}
                 onChange={setAccountId}

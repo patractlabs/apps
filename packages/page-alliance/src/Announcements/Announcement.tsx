@@ -4,6 +4,7 @@
 import type { Cid } from '@polkadot/types/interfaces';
 
 import React from 'react';
+import styled from 'styled-components';
 
 import { useCidEncode } from '../useCid';
 
@@ -18,14 +19,23 @@ function Announcement ({ announcement, className, index }: Props): React.ReactEl
 
   return <tr className={className}>
     <td style={{ width: '20%' }}>
-      {index}
+      <div className='item'>
+        {index}
+      </div>
     </td>
     <td>
-      <a href={hash ? `https://ipfs.io/ipfs/${hash}` : undefined}
-        rel='noopener noreferrer'
-        target='_blank'>{hash}</a>
+      <div className='item'>
+        <a href={hash ? `https://ipfs.io/ipfs/${hash}` : undefined}
+          rel='noopener noreferrer'
+          target='_blank'>{hash}</a>
+      </div>
     </td>
   </tr>;
 }
 
-export default React.memo(Announcement);
+export default React.memo(styled(Announcement)`
+  tr td .item {
+    height: 26px;
+    line-height: 26px;
+  }
+`);

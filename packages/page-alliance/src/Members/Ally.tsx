@@ -58,7 +58,7 @@ function Ally ({ ally, className, isMember, members, onRetire }: Props): React.R
           key='elevate to fellow'
           onClick={toggleElevate}
         >
-          {t('Propose elevate to fellow')}
+          {t('Propose elevating to fellow')}
         </Menu.Item>
       );
     }

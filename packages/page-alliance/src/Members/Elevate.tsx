@@ -24,26 +24,26 @@ function Elevate ({ address, className, members, onClose }: Props): React.ReactE
 
   return <Modal
     className={className}
-    header={t<string>('Propose elevate to fellow')}
+    header={t<string>('propose elevating an ally to fellow')}
     size='large'
   >
     <Modal.Content>
-      <Modal.Columns hint={t<string>('This account will make the proposal and be responsible for the bond.')}>
+      <Modal.Columns hint={t<string>('The alliance founder or fellow accounts for the proposal. The selection is filtered by the current accounts with proposing rights.')}>
         <InputAddress
           filter={members}
           help={t<string>('Select the account you wish to submit the proposal from.')}
-          label={t<string>('submit with account')}
+          label={t<string>('Propose from account')}
           onChange={setAccountId}
           type='account'
           withLabel
         />
       </Modal.Columns>
-      <Modal.Columns hint={t<string>('The account will elevate to fellow.')}>
+      <Modal.Columns hint={t<string>('If the motion is passed, this account will be elevated from ally to fellow, then it will have proposing and voting rights.')}>
         <InputAddress
           defaultValue={address}
-          help={t<string>('xxx')}
+          help={t<string>('The account you wish to be elevated to fellow')}
           isDisabled
-          label={t<string>('xxx')}
+          label={t<string>('elevating account')}
           type='allPlus'
         />
       </Modal.Columns>

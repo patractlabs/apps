@@ -18,8 +18,9 @@ interface Props {
   members: string[];
 }
 
-function Announcements ({ announcements, isMember, members }: Props): React.ReactElement<Props> {
+function Announcements ({ announcements: announcementsSource, isMember, members }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
+  const announcements = useMemo(() => [...(announcementsSource || [])].reverse(), [announcementsSource]);
 
   const header = useMemo(() => [
     [t('Announcements'), 'start'],

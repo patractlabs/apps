@@ -121,5 +121,6 @@ function Blacklist ({ accountBlacklist, className = '', isMember, members, websi
 export default React.memo(styled(Blacklist)`
   tr td .website-item {
     height: 26px;
+    line-height: 26px;
   }
 `);

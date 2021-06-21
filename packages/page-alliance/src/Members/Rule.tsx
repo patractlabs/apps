@@ -34,20 +34,20 @@ function Rule ({ members, onClose }: Props): React.ReactElement<Props> {
 
   return (
     <Modal
-      header={t<string>('Propose setting rule')}
+      header={t<string>('propose setting the Alliance rule')}
       size='large'
     >
       <Modal.Content>
-        <Modal.Columns hint={t<string>('The vote will be recorded for the selected account.')}>
+        <Modal.Columns hint={t<string>('The alliance founder or fellow accounts for the proposal. The selection is filtered by the current accounts with proposing rights.')}>
           <InputAddress
             filter={members}
-            help={t<string>('This account will be use to propose set rule.')}
-            label={t<string>('propose account')}
+            help={t<string>('Select the account you wish to submit the proposal from.')}
+            label={t<string>('Propose from account')}
             onChange={setAccountId}
             type='account'
           />
         </Modal.Columns>
-        <Modal.Columns hint={t<string>('IPFS Hash')}>
+        <Modal.Columns hint={t<string>('The IPFS hash of the new rule. better be formatted in a single Markdown document.')}>
           <Input
             help={t<string>('IPFS hash')}
             isError={!ruleEncode}

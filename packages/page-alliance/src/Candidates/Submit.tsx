@@ -27,24 +27,24 @@ function Submit ({ className }: Props): React.ReactElement<Props> {
     />
     {isVisible && (
       <Modal
-        header={t<string>('Submit candidacy')}
+        header={t<string>('submit your alliance candidacy')}
         size='large'
       >
         <Modal.Content>
-          <Modal.Columns hint={t<string>('xxx')}>
+          <Modal.Columns hint={t<string>('This account will become candidate and be responsible for the deposit. This account shouldn\'t already be a member or in the blacklist.')}>
             <InputAddress
-              help={t<string>('This account will be use to submit candidacy.')}
-              label={t<string>('submit account')}
+              help={t<string>('Select the account you wish to submit for candidate.')}
+              label={t<string>('submit with account')}
               onChange={setAccountId}
               type='account'
             />
           </Modal.Columns>
-          <Modal.Columns hint={t<string>('The bond will be reserved for the duration of your candidacy and membership.')}>
+          <Modal.Columns hint={t<string>('The deposit will be reserved for the duration of your candidacy and membership. If the candidacy is rejected or kicked out from the members in the future, the deposit will be slashed. ')}>
             <InputBalance
               defaultValue={api.consts.alliance.candidateDeposit}
-              help={t<string>('The bond that is reserved')}
+              // help={t<string>('The bond that is reserved')}
               isDisabled
-              label={t<string>('candidacy bond')}
+              label={t<string>('candidacy deposit')}
             />
           </Modal.Columns>
         </Modal.Content>

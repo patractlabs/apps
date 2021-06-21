@@ -18,9 +18,11 @@ interface Props {
   motions?: DeriveCollectiveProposal[];
 }
 
-function Motions ({ className, isMember, members, motions }: Props): React.ReactElement<Props> {
+function Motions ({ className, isMember, members, motions: motionsSource }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { founders, isFounder } = useMembers();
+
+  const motions = useMemo(() => [...(motionsSource || [])].reverse(), [motionsSource]);
 
   const header = useMemo(() => [
     [t('motions'), 'start', 2],

@@ -67,7 +67,7 @@ function InputTextMulti ({ available, availableLabel, className = '', defaultVal
         className='ui--InputTextMulti-Input'
         isSmall
         onChange={setFilter}
-        placeholder={t<string>('filter by name, text, or text index')}
+        placeholder={t<string>('filter by website')}
         value={_filter}
         withLabel={false}
       />

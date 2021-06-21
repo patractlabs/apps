@@ -67,7 +67,7 @@ function InputAddressMulti ({ available, availableLabel, className = '', default
         className='ui--InputAddressMulti-Input'
         isSmall
         onChange={setFilter}
-        placeholder={t<string>('filter by name, address, or account index')}
+        placeholder={t<string>('filter by name, address or index')}
         value={_filter}
         withLabel={false}
       />

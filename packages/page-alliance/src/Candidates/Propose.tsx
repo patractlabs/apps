@@ -23,8 +23,8 @@ function Propose ({ candidate, isMember, members }: Props): React.ReactElement<P
   const [allianceType, setAllianceType] = useState('accept');
 
   const allianceTypeOpt = useMemo(() => [
-    { text: t<string>('Acceptance proposal'), value: 'accept' },
-    { text: t<string>('Rejection proposal'), value: 'reject' }
+    { text: t<string>('Acceptance proposal to alliance'), value: 'accept' },
+    { text: t<string>('Rejection proposal to alliance'), value: 'reject' }
   ], [t]);
 
   const proposal = useMemo(() => {
@@ -42,22 +42,22 @@ function Propose ({ candidate, isMember, members }: Props): React.ReactElement<P
     />
     {isVisible && (
       <Modal
-        header={t<string>('Propose an alliance motion')}
+        header={t<string>('propose accepting or rejecting a candidate')}
         size='large'
       >
         <Modal.Content>
-          <Modal.Columns hint={t<string>('The vote will be recorded for the selected account.')}>
+          <Modal.Columns hint={t<string>('The alliance founder or fellow accounts for the proposal. The selection is filtered by the current accounts with proposing rights.')}>
             <InputAddress
               filter={members}
-              help={t<string>('This account will be use to propose candidacy.')}
-              label={t<string>('propose account')}
+              help={t<string>('Select the account you wish to submit the proposal from.')}
+              label={t<string>('propose from account')}
               onChange={setAccountId}
               type='account'
             />
           </Modal.Columns>
-          <Modal.Columns hint={t<string>('xxx')}>
+          <Modal.Columns hint={t<string>('Proposal can either be to approve or reject this candidacy. Once approved, the candidate will become an ally with deposit remain. Once rejected, the candidate will be removed with deposit slashed.')}>
             <Dropdown
-              help={t<string>('The type of alliance proposal to submit.')}
+              help={t<string>('the type of alliance proposal to submit')}
               label={t<string>('alliance proposal type')}
               onChange={setAllianceType}
               options={allianceTypeOpt}

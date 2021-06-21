@@ -33,7 +33,7 @@ function Close ({ hash, idNumber, members, proposal }: Props): React.ReactElemen
     <>
       {isOpen && (
         <Modal
-          header={t<string>('Close proposal')}
+          header={t<string>('close the proposal')}
           size='large'
         >
           <Modal.Content>
@@ -43,11 +43,11 @@ function Close ({ hash, idNumber, members, proposal }: Props): React.ReactElemen
                 proposal={proposal}
               />
             </Modal.Columns>
-            <Modal.Columns hint={t<string>('The alliance member account that will apply the close for the current round.')}>
+            <Modal.Columns hint={t<string>(' The alliance founder or fellow account that will apply the close for the current round.')}>
               <InputAddress
                 filter={members}
                 help={t<string>('Select the account you wish close the proposal with.')}
-                label={t<string>('sending account')}
+                label={t<string>('close with account')}
                 onChange={setAccountId}
                 type='account'
               />
