@@ -3,6 +3,8 @@
 
 import { useEffect, useState } from 'react';
 
+import { IPFS_GATEWAY } from './constants';
+
 interface UseContent {
   content: string | null;
 }
@@ -26,7 +28,7 @@ export function useContent (cid: string | null): UseContent {
 
   useEffect((): void => {
     if (cid) {
-      fetchData(`https://www.ipfs.io/ipfs/${cid}`).then(setContent).catch(console.error);
+      fetchData(`${IPFS_GATEWAY}/ipfs/${cid}`).then(setContent).catch(console.error);
     }
   }, [cid]);
 

@@ -8,6 +8,7 @@ import styled from 'styled-components';
 
 import { ExpanderMarkdown } from '@polkadot/react-components';
 
+import { IPFS_GATEWAY } from '../constants';
 import { useCidEncode } from '../useCid';
 import { useContent } from '../useContent';
 
@@ -17,26 +18,27 @@ interface Props {
   index: number;
 }
 
-function Announcement ({ announcement, className, index }: Props): React.ReactElement<Props> {
+function Announcement ({ announcement, className }: Props): React.ReactElement<Props> {
   const hash = useCidEncode(announcement);
   const { content } = useContent(hash);
 
   return <tr className={className}>
-    <td style={{ width: '10%' }}>
-      <div className='item'>
-        {index}
-      </div>
-    </td>
-    <td className='overflow'>
-      <div className='item'>
-        <a href={hash ? `https://ipfs.io/ipfs/${hash}` : undefined}
-          rel='noopener noreferrer'
-          target='_blank'>{hash}</a>
-      </div>
+    <td
+      className='start overflow'
+      width='35%'
+    >
+      <a
+        className='item'
+        href={hash ? `${IPFS_GATEWAY}/ipfs/${hash}` : undefined}
+        rel='noopener noreferrer'
+        target='_blank'
+      >
+          /ipfs/{hash}
+      </a>
     </td>
     <td
-      className='expand'
-      width='60%'
+      className='start'
+      width='70%'
     >
       {content
         ? <ExpanderMarkdown content={content} />

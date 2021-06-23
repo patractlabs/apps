@@ -6,6 +6,7 @@ import React, { useMemo } from 'react';
 import { Button, ExpanderMarkdown, Menu, Popup, Table } from '@polkadot/react-components';
 import { useToggle } from '@polkadot/react-hooks';
 
+import { IPFS_GATEWAY } from '../constants';
 import { useTranslation } from '../translate';
 import { useContent } from '../useContent';
 import Rule from './Rule';
@@ -26,7 +27,7 @@ function Rules ({ className, isMember, members, rule }: Props): React.ReactEleme
 
   const header = useMemo(() => [
     [t<string>('Alliance rule')],
-    [t<string>('Content')],
+    [t<string>('Content'), 'start'],
     []
   ], [t]);
 
@@ -54,17 +55,14 @@ function Rules ({ className, isMember, members, rule }: Props): React.ReactEleme
       <tr>
         <td className='start overflow'>
           <a
-            href={rule ? `https://ipfs.io/ipfs/${rule}` : ''}
+            href={rule ? `${IPFS_GATEWAY}/ipfs/${rule}` : ''}
             rel='noopener noreferrer'
             target='_blank'
           >
-            {rule}
+            /ipfs/{rule}
           </a>
         </td>
-        <td
-          className='expand'
-          width='60%'
-        >
+        <td className='start'>
           {content
             ? <ExpanderMarkdown content={content} />
             : '-'}

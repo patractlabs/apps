@@ -48,6 +48,7 @@ function Members ({ allies, className = '', favorites, fellows, founders, isMemb
         founders={founders.length}
       />
       <Rules
+        className='ui--AllianceMember-table'
         isMember={isMember}
         members={members}
         rule={rule}
@@ -84,7 +85,7 @@ function Members ({ allies, className = '', favorites, fellows, founders, isMemb
 }
 
 const StyledMembers: React.FC<Props> = styled(Members)`
-  .ui--AllianceMember-table table tr > td.address {
+  .ui--AllianceMember-table table tr > td:nth-of-type(1) {
     width: 40%;
   }
 `;
