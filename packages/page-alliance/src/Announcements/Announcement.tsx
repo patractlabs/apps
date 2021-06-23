@@ -6,7 +6,7 @@ import type { Cid } from '@polkadot/types/interfaces';
 import React from 'react';
 import styled from 'styled-components';
 
-import { ExpanderMarkdown } from '@polkadot/react-components';
+import { ExpanderMarkdown, Spinner } from '@polkadot/react-components';
 
 import { IPFS_GATEWAY } from '../constants';
 import { useCidEncode } from '../useCid';
@@ -20,7 +20,7 @@ interface Props {
 
 function Announcement ({ announcement, className }: Props): React.ReactElement<Props> {
   const hash = useCidEncode(announcement);
-  const { content } = useContent(hash);
+  const { content, fetching } = useContent(hash);
 
   return <tr className={className}>
     <td
@@ -40,9 +40,11 @@ function Announcement ({ announcement, className }: Props): React.ReactElement<P
       className='start'
       width='70%'
     >
-      {content
-        ? <ExpanderMarkdown content={content} />
-        : '-'}
+      {fetching
+        ? <Spinner noLabel />
+        : content
+          ? <ExpanderMarkdown content={content} />
+          : '-'}
     </td>
   </tr>;
 }

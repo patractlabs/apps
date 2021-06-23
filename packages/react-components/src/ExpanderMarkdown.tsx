@@ -16,7 +16,7 @@ function ExpanderMarkdown ({ className = '', content }: Props): React.ReactEleme
   return (
     <Expander
       className={className}
-      summary={content.split('\n')[0]}
+      summary={content.split('\n')[0].replace('#', '')}
     >
       <Markdown className='ui--ExpanderMarkdown-content'>{content}</Markdown>
     </Expander>

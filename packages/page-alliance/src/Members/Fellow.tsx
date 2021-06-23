@@ -77,7 +77,7 @@ function Fellow ({ className, fellow, isMember, members, onRetire }: Props): Rea
       </td>
       <td className='button'>
         {
-          menuItems.length &&
+          !!menuItems.length &&
             <Popup
               isOpen={isMenuOpen}
               onClose={toggleMenu}

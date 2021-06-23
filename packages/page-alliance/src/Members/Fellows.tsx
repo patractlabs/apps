@@ -48,13 +48,13 @@ function Fellows ({ className = '', favorites, fellows, isMember, members, onRet
 
 export default React.memo(styled(Fellows)`
   tr .account {
-    width: 40%;
+    width: 35%;
   }
-  
+
   tr .website {
     width: 32%;
   }
-  
+
   tr .deposite {
     width: 17%;
   }

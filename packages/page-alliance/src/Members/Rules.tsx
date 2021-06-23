@@ -3,7 +3,7 @@
 
 import React, { useMemo } from 'react';
 
-import { Button, ExpanderMarkdown, Menu, Popup, Table } from '@polkadot/react-components';
+import { Button, ExpanderMarkdown, Menu, Popup, Spinner, Table } from '@polkadot/react-components';
 import { useToggle } from '@polkadot/react-hooks';
 
 import { IPFS_GATEWAY } from '../constants';
@@ -23,7 +23,7 @@ function Rules ({ className, isMember, members, rule }: Props): React.ReactEleme
   const [isMenuOpen, toggleMenu] = useToggle();
   const [isSetRuleOpen, toggleSetRule] = useToggle();
 
-  const { content } = useContent(rule);
+  const { content, fetching } = useContent(rule);
 
   const header = useMemo(() => [
     [t<string>('Alliance rule')],
@@ -63,9 +63,11 @@ function Rules ({ className, isMember, members, rule }: Props): React.ReactEleme
           </a>
         </td>
         <td className='start'>
-          {content
-            ? <ExpanderMarkdown content={content} />
-            : '-'}
+          {fetching
+            ? <Spinner noLabel />
+            : content
+              ? <ExpanderMarkdown content={content} />
+              : '-'}
         </td>
         <td className='button'>
           {

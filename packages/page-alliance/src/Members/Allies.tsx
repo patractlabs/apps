@@ -48,7 +48,7 @@ function Allies ({ allies, className = '', favorites, isMember, members, onRetir
 
 export default React.memo(styled(Allies)`
   tr .account {
-    width: 40%;
+    width: 35%;
   }
 
   tr .website {

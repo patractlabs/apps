@@ -48,7 +48,7 @@ function Founders ({ className = '', favorites, founders, isMember, members, onR
 
 export default React.memo(styled(Founders)`
   tr .account {
-    width: 40%;
+    width: 35%;
   }
 
   tr .website {
