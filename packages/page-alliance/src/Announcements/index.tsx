@@ -24,7 +24,8 @@ function Announcements ({ announcements: announcementsSource, isMember, members 
 
   const header = useMemo(() => [
     [t('Announcements'), 'start'],
-    [t('IPFS Hash'), 'start']
+    [t('IPFS Hash'), 'start'],
+    [t('Content')]
   ], [t]);
 
   return <>

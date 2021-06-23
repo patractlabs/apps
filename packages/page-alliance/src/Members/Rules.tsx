@@ -3,10 +3,11 @@
 
 import React, { useMemo } from 'react';
 
-import { Button, Menu, Popup, Table } from '@polkadot/react-components';
+import { Button, ExpanderMarkdown, Menu, Popup, Table } from '@polkadot/react-components';
 import { useToggle } from '@polkadot/react-hooks';
 
 import { useTranslation } from '../translate';
+import { useContent } from '../useContent';
 import Rule from './Rule';
 
 interface Props {
@@ -21,8 +22,11 @@ function Rules ({ className, isMember, members, rule }: Props): React.ReactEleme
   const [isMenuOpen, toggleMenu] = useToggle();
   const [isSetRuleOpen, toggleSetRule] = useToggle();
 
+  const { content } = useContent(rule);
+
   const header = useMemo(() => [
     [t<string>('Alliance rule')],
+    [t<string>('Content')],
     []
   ], [t]);
 
@@ -48,7 +52,7 @@ function Rules ({ className, isMember, members, rule }: Props): React.ReactEleme
       header={header}
     >
       <tr>
-        <td className='start'>
+        <td className='start overflow'>
           <a
             href={rule ? `https://ipfs.io/ipfs/${rule}` : ''}
             rel='noopener noreferrer'
@@ -56,6 +60,14 @@ function Rules ({ className, isMember, members, rule }: Props): React.ReactEleme
           >
             {rule}
           </a>
+        </td>
+        <td
+          className='expand'
+          width='60%'
+        >
+          {content
+            ? <ExpanderMarkdown content={content} />
+            : '-'}
         </td>
         <td className='button'>
           {
