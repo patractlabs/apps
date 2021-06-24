@@ -52,10 +52,10 @@ export default React.memo(styled(Allies)`
   }
 
   tr .website {
-    width: 32%;
+    width: 30%;
   }
 
-  tr .deposite {
+  tr .deposit {
     width: 17%;
   }
 `);

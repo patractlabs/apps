@@ -25,7 +25,7 @@ function Fellows ({ className = '', favorites, fellows, isMember, members, onRet
   const header = useMemo(() => [
     [t('Fellows'), 'start account', 1],
     [t('Website'), 'start website', undefined],
-    [t('Deposit'), 'start deposite'],
+    [t('Deposit'), 'start deposit'],
     [undefined, undefined, undefined]
   ], [t]);
 
@@ -52,10 +52,10 @@ export default React.memo(styled(Fellows)`
   }
 
   tr .website {
-    width: 32%;
+    width: 30%;
   }
 
-  tr .deposite {
+  tr .deposit {
     width: 17%;
   }
 `);

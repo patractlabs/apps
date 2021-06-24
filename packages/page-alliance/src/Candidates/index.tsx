@@ -56,11 +56,11 @@ function Candidates ({ candidates, className = '', favorites, isMember, members,
 
 export default React.memo(styled(Candidates)`
   tr .account {
-    width: 40%;
+    width: 35%;
   }
 
   tr .website {
-    width: 32%;
+    width: 30%;
   }
 
   tr .deposite {

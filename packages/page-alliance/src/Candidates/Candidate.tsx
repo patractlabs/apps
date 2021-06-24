@@ -24,7 +24,9 @@ function Candidate ({ candidate, className, isMember, members }: Props): React.R
   const deposite = useDeposit(candidate);
 
   return <tr className={className}>
-    <td className='address'><AddressSmall value={candidate} /></td>
+    <td className='address'>
+      <AddressSmall value={candidate} />
+    </td>
     <td className='start'>
       <a
         href={website}
