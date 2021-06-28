@@ -58,7 +58,7 @@ function Remove ({ accountBlacklist, className, isMember, members, websiteBlackl
           }>
             <InputAddressMulti
               available={accountBlacklist}
-              availableLabel={t<string>('account blacklist')}
+              availableLabel={t<string>('account blacklist {{count}}', { replace: { count: accountBlacklist.length } })}
               help={t<string>('All accounts selected will be removed from blacklist, no priority.')}
               maxCount={10}
               onChange={setAccounts}
@@ -70,7 +70,7 @@ function Remove ({ accountBlacklist, className, isMember, members, websiteBlackl
           }>
             <InputTextMulti
               available={websiteBlacklist}
-              availableLabel={t<string>('website blacklist')}
+              availableLabel={t<string>('website blacklist {{count}}', { replace: { count: websiteBlacklist.length } })}
               help={t<string>('All websites selected will be removed from blacklist, no priority. ')}
               maxCount={10}
               onChange={setWebsites}

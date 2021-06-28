@@ -68,7 +68,7 @@ function AddItem ({ index, onChange, value }: ItemProps): React.ReactElement<Ite
     <Columar.Column>
       <Dropdown
         className={'ui--DropdownLinked-Sections'}
-        label={t<string>('Select type')}
+        label={t<string>('Blacklist type')}
         onChange={onTypeChange}
         options={options}
         value={value.type}

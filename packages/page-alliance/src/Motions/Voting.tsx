@@ -37,7 +37,7 @@ function Voting ({ hash, idNumber, isDisabled, members, proposal }: Props): Reac
           size='large'
         >
           <Modal.Content>
-            <Modal.Columns hint={t<string>('The proposal that is being voted on. It will pass when the threshold is reached.')}>
+            <Modal.Columns hint={t<string>('The proposal that is being voted on. It will be passed when the threshold is reached.')}>
               <ProposedAction
                 idNumber={idNumber}
                 proposal={proposal}

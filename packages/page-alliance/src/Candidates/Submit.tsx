@@ -1,10 +1,10 @@
 // Copyright 2017-2021 @polkadot/app-alliance authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Button, InputAddress, InputBalance, Modal, TxButton } from '@polkadot/react-components';
-import { useApi, useToggle } from '@polkadot/react-hooks';
+import { useAccounts, useApi, useToggle } from '@polkadot/react-hooks';
 
 import { useTranslation } from '../translate';
 
@@ -17,11 +17,22 @@ function Submit ({ className }: Props): React.ReactElement<Props> {
   const { api } = useApi();
   const [isVisible, toggleVisible] = useToggle();
   const [accountId, setAccountId] = useState<string | null>(null);
+  const { allAccounts } = useAccounts();
+  const [accounts, setAccounts] = useState<string[]>([]);
+
+  useEffect(() => {
+    Promise.all(allAccounts.map((account) => api.derive.accounts.info(account)))
+      .then((accountInfos) => {
+        setAccounts(allAccounts.filter((_, index) => (accountInfos[index].identity.web && accountInfos[index].identity.judgements.length > 0)));
+      })
+      .catch(console.error);
+  }, [allAccounts, api]);
 
   return <>
     <Button
       className={className}
       icon='plus'
+      isDisabled={accounts.length === 0}
       label={t<string>('Submit candidacy')}
       onClick={toggleVisible}
     />
@@ -33,6 +44,7 @@ function Submit ({ className }: Props): React.ReactElement<Props> {
         <Modal.Content>
           <Modal.Columns hint={t<string>('This account will become candidate and be responsible for the deposit. This account shouldn\'t already be a member or in the blacklist.')}>
             <InputAddress
+              filter={accounts}
               help={t<string>('Select the account you wish to submit for candidate.')}
               label={t<string>('submit with account')}
               onChange={setAccountId}
