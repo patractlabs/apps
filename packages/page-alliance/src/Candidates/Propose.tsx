@@ -55,7 +55,7 @@ function Propose ({ candidate, isMember, members }: Props): React.ReactElement<P
               type='account'
             />
           </Modal.Columns>
-          <Modal.Columns hint={t<string>('Proposal can either be to approve or reject this candidacy. Once approved, the candidate will become an ally with deposit remain. Once rejected, the candidate will be removed with deposit slashed.')}>
+          <Modal.Columns hint={t<string>('Proposal can either be to approve or reject this candidacy. Once approved, the candidate will become an ally with a deposit remaining. Once rejected, the candidate will be removed with deposit slashed.')}>
             <Dropdown
               help={t<string>('the type of alliance proposal to submit')}
               label={t<string>('alliance proposal type')}

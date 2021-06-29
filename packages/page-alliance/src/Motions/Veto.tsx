@@ -29,7 +29,7 @@ function Veto ({ className = '', founders, idNumber, onClose, proposal }: Props)
     size='large'
   >
     <Modal.Content>
-      <Modal.Columns hint={t<string>('The proposal that will be vetoed. Once vetoed for the current voting round, it would need to be re-submitted to alliance for a subsequent voting round.')}>
+      <Modal.Columns hint={t<string>('The proposal that will be vetoed. Once vetoed for the current voting round, it would need to be re-submitted to the alliance for a subsequent voting round.')}>
         <ProposedAction
           idNumber={idNumber}
           proposal={proposal}
@@ -38,7 +38,7 @@ function Veto ({ className = '', founders, idNumber, onClose, proposal }: Props)
       <Modal.Columns hint={t<string>('The alliance founder account that will veto the proposal for the current round.')}>
         <InputAddress
           filter={founders}
-          help={t<string>('Select the account you wish veto the proposal with.')}
+          help={t<string>('Select the account you wish to veto the proposal with.')}
           label={t<string>('veto with account')}
           onChange={setAccountId}
           type='account'

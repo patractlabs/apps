@@ -42,16 +42,16 @@ function Submit ({ className }: Props): React.ReactElement<Props> {
         size='large'
       >
         <Modal.Content>
-          <Modal.Columns hint={t<string>('This account will become candidate and be responsible for the deposit. This account shouldn\'t already be a member or in the blacklist.')}>
+          <Modal.Columns hint={t<string>('This account will become a candidate and be responsible for the deposit. This account shouldn\'t already be a member or in the blacklist.')}>
             <InputAddress
               filter={accounts}
-              help={t<string>('Select the account you wish to submit for candidate.')}
+              help={t<string>('Select the account you wish to submit for the candidate.')}
               label={t<string>('submit with account')}
               onChange={setAccountId}
               type='account'
             />
           </Modal.Columns>
-          <Modal.Columns hint={t<string>('The deposit will be reserved for the duration of your candidacy and membership. If the candidacy is rejected or kicked out from the members in the future, the deposit will be slashed. ')}>
+          <Modal.Columns hint={t<string>('The deposit will be reserved for the duration of your candidacy and membership. If the candidate is rejected or kicked out from the members in the future, the deposit will be slashed. ')}>
             <InputBalance
               defaultValue={api.consts.alliance.candidateDeposit}
               // help={t<string>('The bond that is reserved')}

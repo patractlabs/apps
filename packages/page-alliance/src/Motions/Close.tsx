@@ -37,7 +37,7 @@ function Close ({ hash, idNumber, members, proposal }: Props): React.ReactElemen
           size='large'
         >
           <Modal.Content>
-            <Modal.Columns hint={t<string>('The proposal that will be affected. Once closed for the current voting round, it would need to be re-submitted to alliance for a subsequent voting round.')}>
+            <Modal.Columns hint={t<string>('The proposal that will be affected. Once closed for the current voting round, it would need to be re-submitted to the alliance for a subsequent voting round.')}>
               <ProposedAction
                 idNumber={idNumber}
                 proposal={proposal}
@@ -46,7 +46,7 @@ function Close ({ hash, idNumber, members, proposal }: Props): React.ReactElemen
             <Modal.Columns hint={t<string>(' The alliance founder or fellow account that will apply the close for the current round.')}>
               <InputAddress
                 filter={members}
-                help={t<string>('Select the account you wish close the proposal with.')}
+                help={t<string>('Select the account you wish to close the proposal with.')}
                 label={t<string>('close with account')}
                 onChange={setAccountId}
                 type='account'
