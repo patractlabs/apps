@@ -32,9 +32,9 @@ export function useContent (cid: string | null): UseContent {
   const [fetching, setFetching] = useState<boolean>(false);
 
   useEffect((): void => {
-    setFetching(true);
-
     if (cid) {
+      setFetching(true);
+
       fetchData(`${IPFS_GATEWAY}/ipfs/${cid}`).then(setContent).catch(console.error).finally(() => setFetching(false));
     }
   }, [cid]);

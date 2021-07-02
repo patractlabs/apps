@@ -54,13 +54,15 @@ function Rules ({ className, isMember, members, rule }: Props): React.ReactEleme
     >
       <tr>
         <td className='start overflow'>
-          <a
-            href={rule ? `${IPFS_GATEWAY}/ipfs/${rule}` : ''}
-            rel='noopener noreferrer'
-            target='_blank'
-          >
+          {rule
+            ? <a
+              href={rule ? `${IPFS_GATEWAY}/ipfs/${rule}` : ''}
+              rel='noopener noreferrer'
+              target='_blank'
+            >
             /ipfs/{rule}
-          </a>
+            </a>
+            : '-'}
         </td>
         <td className='start'>
           {fetching
