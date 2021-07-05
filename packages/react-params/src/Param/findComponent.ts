@@ -14,6 +14,7 @@ import Balance from './Balance';
 import Bool from './Bool';
 import Bytes from './Bytes';
 import Call from './Call';
+import Cid from './Cid';
 import Code from './Code';
 import DispatchError from './DispatchError';
 import DispatchResult from './DispatchResult';
@@ -72,6 +73,7 @@ const componentDef: TypeToComponent[] = [
   { c: VectorFixed, t: ['VecFixed'] },
   { c: Vote, t: ['Vote'] },
   { c: VoteThreshold, t: ['VoteThreshold'] },
+  { c: Cid, t: ['Cid'] },
   { c: Unknown, t: ['Unknown'] }
 ];
 
