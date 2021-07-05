@@ -7,29 +7,29 @@ import type { Props } from '../types';
 import React from 'react';
 
 import { useCidEncode } from '@polkadot/app-alliance/useCid';
-import { Input } from '@polkadot/react-components';
+import { Static } from '@polkadot/react-components';
 
+import { useTranslation } from '../translate';
 import Bare from './Bare';
 
-function CidComp ({ className = '', defaultValue: { isValid, value }, isDisabled, isError, isInOption, label, onChange, onEnter, onEscape, registry, type, withLabel }: Props): React.ReactElement<Props> {
+function CidParam ({ className = '', defaultValue: { value }, isDisabled, isError, label, withLabel }: Props): React.ReactElement<Props> {
+  const { t } = useTranslation();
+
   const cidStr = useCidEncode(value as Cid);
 
   return (
     <Bare className={className}>
-      <Input
+      <Static
         className='full'
-        defaultValue={cidStr}
         isDisabled={isDisabled}
-        isError={isError || !isValid}
+        isError={isError}
         label={label}
-        onEnter={onEnter}
-        onEscape={onEscape}
-        placeholder='cid hash'
-        type='text'
+        value={cidStr || t<string>('<empty>')}
+        withCopy
         withLabel={withLabel}
       />
     </Bare>
   );
 }
 
-export default React.memo(CidComp);
+export default React.memo(CidParam);
