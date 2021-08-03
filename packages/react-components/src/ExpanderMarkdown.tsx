@@ -26,5 +26,8 @@ function ExpanderMarkdown ({ className = '', content }: Props): React.ReactEleme
 export default React.memo(styled(ExpanderMarkdown)`
   .ui--ExpanderMarkdown-content {
     text-align: left;
+    h1 {
+      text-transform:none;
+    }
   }
 `);
