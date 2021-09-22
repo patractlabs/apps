@@ -23,7 +23,7 @@ interface Props {
   valueLabel: React.ReactNode;
 }
 
-function InputAddressMulti ({ available, availableLabel, className = '', defaultValue, maxCount, onChange, valueLabel }: Props): React.ReactElement<Props> {
+function InputTextMulti ({ available, availableLabel, className = '', defaultValue, maxCount, onChange, valueLabel }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const [_filter, setFilter] = useState<string>('');
   const [selected, setSelected] = useState<string[]>([]);
@@ -39,64 +39,64 @@ function InputAddressMulti ({ available, availableLabel, className = '', default
   }, [onChange, selected]);
 
   const _onSelect = useCallback(
-    (address: string): void =>
+    (text: string): void =>
       setSelected(
         (selected: string[]) =>
-          !selected.includes(address) && (selected.length < maxCount)
-            ? selected.concat(address)
+          !selected.includes(text) && (selected.length < maxCount)
+            ? selected.concat(text)
             : selected
       ),
     [maxCount]
   );
 
   const _onDeselect = useCallback(
-    (address: string): void =>
+    (text: string): void =>
       setSelected(
         (selected: string[]) =>
-          selected.includes(address)
-            ? selected.filter((a) => a !== address)
+          selected.includes(text)
+            ? selected.filter((a) => a !== text)
             : selected
       ),
     []
   );
 
   return (
-    <div className={`ui--InputAddressMulti ${className}`}>
+    <div className={`ui--InputTextMulti ${className}`}>
       <Input
         autoFocus
-        className='ui--InputAddressMulti-Input'
+        className='ui--InputTextMulti-Input'
         isSmall
         onChange={setFilter}
-        placeholder={t<string>('filter by name, address or index')}
+        placeholder={t<string>('filter by website')}
         value={_filter}
         withLabel={false}
       />
-      <div className='ui--InputAddressMulti-columns'>
-        <div className='ui--InputAddressMulti-column'>
+      <div className='ui--InputTextMulti-columns'>
+        <div className='ui--InputTextMulti-column'>
           <label>{valueLabel}</label>
-          <div className='ui--InputAddressMulti-items'>
-            {selected.map((address): React.ReactNode => (
+          <div className='ui--InputTextMulti-items'>
+            {selected.map((text): React.ReactNode => (
               <Selected
-                address={address}
-                key={address}
+                key={text}
                 onDeselect={_onDeselect}
+                text={text}
               />
             ))}
           </div>
         </div>
-        <div className='ui--InputAddressMulti-column'>
+        <div className='ui--InputTextMulti-column'>
           <label>{availableLabel}</label>
-          <div className='ui--InputAddressMulti-items'>
+          <div className='ui--InputTextMulti-items'>
             {isLoading
               ? <Spinner />
               : (
-                available.map((address) => (
+                available.map((text) => (
                   <Available
-                    address={address}
                     filter={filter}
-                    isHidden={selected?.includes(address)}
-                    key={address}
+                    isHidden={selected?.includes(text)}
+                    key={text}
                     onSelect={_onSelect}
+                    text={text}
                   />
                 ))
               )
@@ -108,25 +108,25 @@ function InputAddressMulti ({ available, availableLabel, className = '', default
   );
 }
 
-export default React.memo(styled(InputAddressMulti)`
+export default React.memo(styled(InputTextMulti)`
   border-top-width: 0px;
   margin-left: 2rem;
   width: calc(100% - 2rem);
 
-  .ui--InputAddressMulti-Input {
+  .ui--InputTextMulti-Input {
     .ui.input {
       margin-bottom: 0.25rem;
       opacity: 1 !important;
     }
   }
 
-  .ui--InputAddressMulti-columns {
+  .ui--InputTextMulti-columns {
     display: inline-flex;
     flex-direction: row-reverse;
     justify-content: space-between;
     width: 100%;
 
-    .ui--InputAddressMulti-column {
+    .ui--InputTextMulti-column {
       display: flex;
       flex-direction: column;
       min-height: 15rem;
@@ -134,30 +134,27 @@ export default React.memo(styled(InputAddressMulti)`
       width: 50%;
       padding: 0.25rem 0.5rem;
 
-      .ui--InputAddressMulti-items {
+      .ui--InputTextMulti-items {
         padding: 0.5rem 0;
         background: var(--bg-input);
-        border: 1px solid var(--border-input);
+        border: 1px solid rgba(34,36,38,0.15);
         border-radius: 0.286rem 0.286rem;
         flex: 1;
         overflow-y: auto;
         overflow-x: hidden;
 
-        .ui--Spinner {
-          margin-top: 2rem;
-        }
 
-        .ui--AddressToggle {
-          padding-left: 0.75rem;
-        }
+        > div {
+          padding: 0.5rem 0.75rem;
+          margin: 0.125rem;
+          border: 1px solid transparent;
+          border-radius: 0.25rem;
 
-        .ui--AddressMini-address {
-          min-width: auto;
-          max-width: 100%;
-        }
+          cursor: pointer;
 
-        .ui--AddressMini-info {
-          max-width: 100%;
+          &:hover {
+            border-color: #ccc;
+          }
         }
       }
     }
