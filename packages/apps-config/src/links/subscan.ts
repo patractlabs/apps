@@ -16,6 +16,9 @@ export default {
     'Darwinia Crab': 'crab',
     Edgeware: 'edgeware',
     Equilibrium: 'equilibrium',
+    'KILT Peregrine': 'kilt-testnet',
+    'KILT Spiritnet': 'spiritnet',
+    Karura: 'karura',
     Kulupu: 'kulupu',
     Kusama: 'kusama',
     'Laminar Turbulence TC2': 'laminar-testnet',
@@ -23,6 +26,7 @@ export default {
     Plasm: 'plasm',
     Polkadot: 'polkadot',
     Rococo: 'rococo',
+    Shiden: 'shiden',
     Stafi: 'stafi',
     Westend: 'westend'
   },
