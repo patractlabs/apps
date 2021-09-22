@@ -3,7 +3,7 @@
 
 import React, { useMemo } from 'react';
 
-import { Button, ExpanderMarkdown, Menu, Popup, Spinner, Table } from '@polkadot/react-components';
+import { ExpanderMarkdown, Menu, Popup, Spinner, Table } from '@polkadot/react-components';
 import { useToggle } from '@polkadot/react-hooks';
 
 import { IPFS_GATEWAY } from '../constants';
@@ -35,12 +35,14 @@ function Rules ({ className, isMember, members, rule }: Props): React.ReactEleme
     const items = [];
 
     if (isMember) {
-      items.push(<Menu.Item
-        key='set-rule'
-        onClick={toggleSetRule}
-      >
-        {t('Propose setting rule')}
-      </Menu.Item>);
+      items.push(
+        <Menu.Item
+          key='set-rule'
+          onClick={toggleSetRule}
+        >
+          {t('Propose setting rule')}
+        </Menu.Item>
+      );
     }
 
     return items;
@@ -77,21 +79,12 @@ function Rules ({ className, isMember, members, rule }: Props): React.ReactEleme
               <Popup
                 isOpen={isMenuOpen}
                 onClose={toggleMenu}
-                trigger={
-                  <Button
-                    icon='ellipsis-v'
-                    onClick={toggleMenu}
-                  />
+                value={
+                  <Menu>
+                    {menuItems}
+                  </Menu>
                 }
-              >
-                <Menu
-                  onClick={toggleMenu}
-                  text
-                  vertical
-                >
-                  {menuItems}
-                </Menu>
-              </Popup>
+              />
           }
         </td>
       </tr>
@@ -100,7 +93,8 @@ function Rules ({ className, isMember, members, rule }: Props): React.ReactEleme
           <Rule
             isMember={isMember}
             members={members}
-            onClose={toggleSetRule} />
+            onClose={toggleSetRule}
+          />
       }
     </Table>
   );

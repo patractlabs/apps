@@ -43,6 +43,7 @@ function Propose ({ className = '', isMember, members }: Props): React.ReactElem
     {isVisible && (
       <Modal
         header={t<string>('propose an announcement')}
+        onClose={toggleVisible}
         size='large'
       >
         <Modal.Content>
@@ -64,7 +65,7 @@ function Propose ({ className = '', isMember, members }: Props): React.ReactElem
             />
           </Modal.Columns>
         </Modal.Content>
-        <Modal.Actions onCancel={toggleVisible}>
+        <Modal.Actions>
           <TxButton
             accountId={accountId}
             isDisabled={!accountId || !hashEncode}

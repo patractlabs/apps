@@ -34,6 +34,7 @@ function Close ({ hash, idNumber, members, proposal }: Props): React.ReactElemen
       {isOpen && (
         <Modal
           header={t<string>('close the proposal')}
+          onClose={toggleOpen}
           size='large'
         >
           <Modal.Content>
@@ -53,7 +54,7 @@ function Close ({ hash, idNumber, members, proposal }: Props): React.ReactElemen
               />
             </Modal.Columns>
           </Modal.Content>
-          <Modal.Actions onCancel={toggleOpen}>
+          <Modal.Actions>
             <TxButton
               accountId={accountId}
               onStart={toggleOpen}

@@ -35,6 +35,7 @@ function Rule ({ members, onClose }: Props): React.ReactElement<Props> {
   return (
     <Modal
       header={t<string>('propose setting the Alliance rule')}
+      onClose={onClose}
       size='large'
     >
       <Modal.Content>
@@ -56,7 +57,7 @@ function Rule ({ members, onClose }: Props): React.ReactElement<Props> {
           />
         </Modal.Columns>
       </Modal.Content>
-      <Modal.Actions onCancel={onClose}>
+      <Modal.Actions>
         <TxButton
           accountId={accountId}
           isDisabled={!accountId || !ruleEncode}

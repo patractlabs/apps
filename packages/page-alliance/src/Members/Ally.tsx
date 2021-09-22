@@ -3,7 +3,7 @@
 
 import React, { useCallback, useMemo } from 'react';
 
-import { AddressSmall, Button, Menu, Popup } from '@polkadot/react-components';
+import { AddressSmall, Menu, Popup } from '@polkadot/react-components';
 import { useAccounts, useToggle } from '@polkadot/react-hooks';
 import { FormatBalance } from '@polkadot/react-query';
 
@@ -38,12 +38,14 @@ function Ally ({ ally, className, isMember, members, onRetire }: Props): React.R
     const items = [];
 
     if (allAccounts.includes(ally)) {
-      items.push(<Menu.Item
-        key='retire'
-        onClick={_onRetire}
-      >
-        {t('Retire')}
-      </Menu.Item>);
+      items.push(
+        <Menu.Item
+          key='retire'
+          onClick={_onRetire}
+        >
+          {t('Retire')}
+        </Menu.Item>
+      );
     }
 
     if (isMember) {
@@ -91,36 +93,32 @@ function Ally ({ ally, className, isMember, members, onRetire }: Props): React.R
             <Popup
               isOpen={isMenuOpen}
               onClose={toggleMenu}
-              trigger={
-                <Button
-                  icon='ellipsis-v'
-                  onClick={toggleMenu}
-                />
-              }
-            >
-              <Menu
-                onClick={toggleMenu}
-                text
-                vertical
-              >
-                {menuItems}
-              </Menu>
-            </Popup>
+              value={
+                <Menu>
+                  {menuItems}
+                </Menu>}
+            />
         }
       </td>
     </tr>
-    {isKickOpen && <Kick
-      address={ally}
-      key='kick'
-      members={members}
-      onClose={toggleKick}
-    />}
-    {isElevateOpen && <Elevate
-      address={ally}
-      key='elevate'
-      members={members}
-      onClose={toggleElevate}
-    />}
+    {
+      isKickOpen &&
+      <Kick
+        address={ally}
+        key='kick'
+        members={members}
+        onClose={toggleKick}
+      />
+    }
+    {
+      isElevateOpen &&
+        <Elevate
+          address={ally}
+          key='elevate'
+          members={members}
+          onClose={toggleElevate}
+        />
+    }
   </>;
 }
 

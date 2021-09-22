@@ -6,7 +6,7 @@ import type { DeriveCollectiveProposal } from '@polkadot/api-derive/types';
 import React, { useMemo } from 'react';
 
 import ProposalCell from '@polkadot/app-democracy/Overview/ProposalCell';
-import { Button, Icon, Menu, Popup, TxButton } from '@polkadot/react-components';
+import { Icon, Menu, Popup, TxButton } from '@polkadot/react-components';
 import { useAccounts, useApi, useToggle, useVotingStatus, useWeight } from '@polkadot/react-hooks';
 import { BlockToTime } from '@polkadot/react-query';
 import { formatNumber } from '@polkadot/util';
@@ -47,12 +47,14 @@ function Motion ({ className = '', founders, isFounder, isMember, members, motio
       proposal.section.toLowerCase() === 'alliance' &&
       (proposal.method.toLowerCase() === 'elevateally' || proposal.method.toLowerCase() === 'setrule')
     ) {
-      items.push(<Menu.Item
-        key='veto'
-        onClick={toggleVeto}
-      >
-        {t('Veto')}
-      </Menu.Item>);
+      items.push(
+        <Menu.Item
+          key='veto'
+          onClick={toggleVeto}
+        >
+          {t('Veto')}
+        </Menu.Item>
+      );
     }
 
     return items;
@@ -165,21 +167,12 @@ function Motion ({ className = '', founders, isFounder, isMember, members, motio
             <Popup
               isOpen={isMenuOpen}
               onClose={toggleMenu}
-              trigger={
-                <Button
-                  icon='ellipsis-v'
-                  onClick={toggleMenu}
-                />
+              value={
+                <Menu>
+                  {menuItems}
+                </Menu>
               }
-            >
-              <Menu
-                onClick={toggleMenu}
-                text
-                vertical
-              >
-                {menuItems}
-              </Menu>
-            </Popup>
+            />
         }
       </td>
       {

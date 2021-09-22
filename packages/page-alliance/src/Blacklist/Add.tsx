@@ -145,6 +145,7 @@ function Add ({ className, isMember, members }: Props): React.ReactElement<Props
     {isVisible && (
       <Modal
         header={t<string>('propose adding blacklist items')}
+        onClose={toggleVisible}
         size='large'
       >
         <Modal.Content>
@@ -163,6 +164,7 @@ function Add ({ className, isMember, members }: Props): React.ReactElement<Props
               <AddItem
                 index={index}
                 key={index}
+                // eslint-disable-next-line react/jsx-no-bind
                 onChange={(value) => setBlacklists((_blacklists) => _blacklists.map((_blacklist, i) => i === index ? value : _blacklist))}
                 value={blacklist}
               />
@@ -182,7 +184,7 @@ function Add ({ className, isMember, members }: Props): React.ReactElement<Props
             />
           </Button.Group>
         </Modal.Content>
-        <Modal.Actions onCancel={toggleVisible}>
+        <Modal.Actions>
           <TxButton
             accountId={accountId}
             isDisabled={!accountId || !isValid}

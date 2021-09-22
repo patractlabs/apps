@@ -3,7 +3,7 @@
 
 import React, { useCallback, useMemo } from 'react';
 
-import { AddressSmall, Button, Menu, Popup } from '@polkadot/react-components';
+import { AddressSmall, Menu, Popup } from '@polkadot/react-components';
 import { useAccounts, useToggle } from '@polkadot/react-hooks';
 import { FormatBalance } from '@polkadot/react-query';
 
@@ -36,21 +36,25 @@ function Founder ({ className, founder, isMember, members, onRetire }: Props): R
     const items = [];
 
     if (allAccounts.includes(founder)) {
-      items.push(<Menu.Item
-        key='retire'
-        onClick={_onRetire}
-      >
-        {t('Retire')}
-      </Menu.Item>);
+      items.push(
+        <Menu.Item
+          key='retire'
+          onClick={_onRetire}
+        >
+          {t('Retire')}
+        </Menu.Item>
+      );
     }
 
     if (isMember) {
-      items.push(<Menu.Item
-        key='kicking out'
-        onClick={toggleKick}
-      >
-        {t('Propose kicking out')}
-      </Menu.Item>);
+      items.push(
+        <Menu.Item
+          key='kicking out'
+          onClick={toggleKick}
+        >
+          {t('Propose kicking out')}
+        </Menu.Item>
+      );
     }
 
     return items;
@@ -81,25 +85,17 @@ function Founder ({ className, founder, isMember, members, onRetire }: Props): R
             <Popup
               isOpen={isMenuOpen}
               onClose={toggleMenu}
-              trigger={
-                <Button
-                  icon='ellipsis-v'
-                  onClick={toggleMenu}
-                />
+              value={
+                <Menu>
+                  {menuItems}
+                </Menu>
               }
-            >
-              <Menu
-                onClick={toggleMenu}
-                text
-                vertical
-              >
-                {menuItems}
-              </Menu>
-            </Popup>
+            />
         }
       </td>
     </tr>
-    {isKickOpen && <Kick
+    {isKickOpen &&
+    <Kick
       address={founder}
       members={members}
       onClose={toggleKick}

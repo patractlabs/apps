@@ -43,6 +43,7 @@ function Propose ({ candidate, isMember, members }: Props): React.ReactElement<P
     {isVisible && (
       <Modal
         header={t<string>('propose accepting or rejecting a candidate')}
+        onClose={toggleVisible}
         size='large'
       >
         <Modal.Content>
@@ -65,7 +66,7 @@ function Propose ({ candidate, isMember, members }: Props): React.ReactElement<P
             />
           </Modal.Columns>
         </Modal.Content>
-        <Modal.Actions onCancel={toggleVisible}>
+        <Modal.Actions>
           <TxButton
             accountId={accountId}
             isDisabled={!accountId}

@@ -32,6 +32,7 @@ function Nominate ({ className, isMember, members }: Props): React.ReactElement<
     {isVisible && (
       <Modal
         header={t<string>('nominate an alliance candidacy')}
+        onClose={toggleVisible}
         size='large'
       >
         <Modal.Content>
@@ -53,7 +54,7 @@ function Nominate ({ className, isMember, members }: Props): React.ReactElement<
             />
           </Modal.Columns>
         </Modal.Content>
-        <Modal.Actions onCancel={toggleVisible}>
+        <Modal.Actions>
           <TxButton
             accountId={accountId}
             isDisabled={!accountId}

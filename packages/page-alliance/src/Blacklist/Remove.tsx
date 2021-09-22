@@ -41,6 +41,7 @@ function Remove ({ accountBlacklist, className, isMember, members, websiteBlackl
     {isVisible && (
       <Modal
         header={t<string>('propose removing blacklist items')}
+        onClose={toggleVisible}
         size='large'
       >
         <Modal.Content>
@@ -55,7 +56,8 @@ function Remove ({ accountBlacklist, className, isMember, members, websiteBlackl
           </Modal.Columns>
           <Modal.Columns hint={
             <p>{t<string>('Accounts can be selected manually from the list of all current accounts.')}</p>
-          }>
+          }
+          >
             <InputAddressMulti
               available={accountBlacklist}
               availableLabel={t<string>('account blacklist items')}
@@ -67,7 +69,8 @@ function Remove ({ accountBlacklist, className, isMember, members, websiteBlackl
           </Modal.Columns>
           <Modal.Columns hint={
             <p>{t<string>('Websites can be selected manually from the list of all current websites.')}</p>
-          }>
+          }
+          >
             <InputTextMulti
               available={websiteBlacklist}
               availableLabel={t<string>('website blacklist items')}
@@ -78,7 +81,7 @@ function Remove ({ accountBlacklist, className, isMember, members, websiteBlackl
             />
           </Modal.Columns>
         </Modal.Content>
-        <Modal.Actions onCancel={toggleVisible}>
+        <Modal.Actions>
           <TxButton
             accountId={accountId}
             isDisabled={!accountId || (accounts.length + websites.length === 0)}

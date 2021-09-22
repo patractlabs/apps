@@ -26,6 +26,7 @@ function Veto ({ className = '', founders, idNumber, onClose, proposal }: Props)
   return <Modal
     className={className}
     header={t<string>('veto the proposal')}
+    onClose={onClose}
     size='large'
   >
     <Modal.Content>
@@ -46,7 +47,7 @@ function Veto ({ className = '', founders, idNumber, onClose, proposal }: Props)
         />
       </Modal.Columns>
     </Modal.Content>
-    <Modal.Actions onCancel={onClose}>
+    <Modal.Actions>
       <TxButton
         accountId={accountId}
         icon='plus'

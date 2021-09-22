@@ -39,6 +39,7 @@ function Submit ({ className }: Props): React.ReactElement<Props> {
     {isVisible && (
       <Modal
         header={t<string>('submit your alliance candidacy')}
+        onClose={toggleVisible}
         size='large'
       >
         <Modal.Content>
@@ -60,7 +61,7 @@ function Submit ({ className }: Props): React.ReactElement<Props> {
             />
           </Modal.Columns>
         </Modal.Content>
-        <Modal.Actions onCancel={toggleVisible}>
+        <Modal.Actions>
           <TxButton
             accountId={accountId}
             isDisabled={!accountId}

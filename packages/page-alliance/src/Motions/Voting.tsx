@@ -34,6 +34,7 @@ function Voting ({ hash, idNumber, isDisabled, members, proposal }: Props): Reac
       {isVotingOpen && (
         <Modal
           header={t<string>('vote on proposal')}
+          onClose={toggleVoting}
           size='large'
         >
           <Modal.Content>
@@ -50,7 +51,7 @@ function Voting ({ hash, idNumber, isDisabled, members, proposal }: Props): Reac
               />
             </Modal.Columns>
           </Modal.Content>
-          <Modal.Actions onCancel={toggleVoting}>
+          <Modal.Actions>
             <TxButton
               accountId={accountId}
               icon='ban'
