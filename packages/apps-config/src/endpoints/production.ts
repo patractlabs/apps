@@ -18,6 +18,21 @@ import { expandEndpoints } from './util';
 export function createProduction (t: TFunction, firstOnly: boolean, withSort: boolean): LinkOption[] {
   return expandEndpoints(t, [
     {
+      info: 'aleph',
+      text: t('rpc.prod.aleph', 'Aleph Zero', { ns: 'apps-config' }),
+      providers: {
+        'Aleph Zero Foundation': 'wss://ws.azero.dev'
+      }
+    },
+    {
+      info: 'automata',
+      text: t('rpc.prod.automata', 'Automata', { ns: 'apps-config' }),
+      providers: {
+        'Automata Network': 'wss://api.ata.network',
+        OnFinality: 'wss://automata.api.onfinality.io/public-ws'
+      }
+    },
+    {
       dnslink: 'centrifuge',
       info: 'centrifuge',
       text: t('rpc.prod.centrifuge', 'Centrifuge', { ns: 'apps-config' }),
@@ -29,8 +44,15 @@ export function createProduction (t: TFunction, firstOnly: boolean, withSort: bo
       info: 'chainx',
       text: t('rpc.prod.chainx', 'ChainX', { ns: 'apps-config' }),
       providers: {
-        // ChainX: 'wss://mainnet.chainx.org/ws', // https://github.com/polkadot-js/apps/issues/5547
-        'Patract Elara': 'wss://pub.elara.patract.io/chainx'
+        ChainX: 'wss://mainnet.chainx.org/ws'
+        // 'Patract Elara': 'wss://pub.elara.patract.io/chainx'
+      }
+    },
+    {
+      info: 'coinversation',
+      text: t('rpc.prod.coinversation', 'Coinversation', { ns: 'apps-config' }),
+      providers: {
+        Coinversation: 'wss://rpc.coinversation.io/'
       }
     },
     {
@@ -63,8 +85,8 @@ export function createProduction (t: TFunction, firstOnly: boolean, withSort: bo
       }
     },
     {
-      info: 'dock-mainnet',
-      text: t('rpc.prod.dock-mainnet', 'Dock', { ns: 'apps-config' }),
+      info: 'dock-pos-mainnet',
+      text: t('rpc.prod.dock-pos-mainnet', 'Dock', { ns: 'apps-config' }),
       providers: {
         'Dock Association': 'wss://mainnet-node.dock.io',
         'Patract Elara': 'wss://pub.elara.patract.io/dock'
@@ -78,6 +100,13 @@ export function createProduction (t: TFunction, firstOnly: boolean, withSort: bo
         'Commonwealth Labs': 'wss://mainnet.edgewa.re',
         'Patract Elara': 'wss://pub.elara.patract.io/edgeware',
         OnFinality: 'wss://edgeware.api.onfinality.io/public-ws'
+      }
+    },
+    {
+      info: 'efinity',
+      text: t('rpc.prod.efinity', 'Efinity', { ns: 'apps-config' }),
+      providers: {
+        Efinity: 'wss://rpc.efinity.io'
       }
     },
     {
@@ -108,8 +137,7 @@ export function createProduction (t: TFunction, firstOnly: boolean, withSort: bo
       providers: {
         HydraDX: 'wss://rpc-01.snakenet.hydradx.io',
         'Galactic Council': 'wss://rpc-02.snakenet.hydradx.io',
-        Archives: 'wss://archive.snakenet.hydradx.io',
-        Pinknode: 'wss://rpc.pinknode.io/lerna/explorer'
+        Archives: 'wss://archive.snakenet.hydradx.io'
       }
     },
     {
@@ -122,10 +150,25 @@ export function createProduction (t: TFunction, firstOnly: boolean, withSort: bo
       }
     },
     {
+      info: 'mathchain',
+      text: t('rpc.prod.mathchain', 'MathChain', { ns: 'apps-config' }),
+      providers: {
+        MathWallet: 'wss://mathchain-asia.maiziqianbao.net/ws',
+        'MathWallet Backup': 'wss://mathchain-us.maiziqianbao.net/ws'
+      }
+    },
+    {
       info: 'neatcoin',
       text: t('rpc.prod.neatcoin', 'Neatcoin', { ns: 'apps-config' }),
       providers: {
         Neatcoin: 'wss://rpc.neatcoin.org/ws'
+      }
+    },
+    {
+      info: 'nftmart',
+      text: t('rpc.prod.nftmart', 'NFTMart', { ns: 'apps-config' }),
+      providers: {
+        NFTMart: 'wss://mainnet.nftmart.io/rpc/ws'
       }
     },
     {
@@ -142,6 +185,20 @@ export function createProduction (t: TFunction, firstOnly: boolean, withSort: bo
       text: t('rpc.prod.plasm', 'Plasm', { ns: 'apps-config' }),
       providers: {
         'Stake Technologies': 'wss://rpc.plasmnet.io/'
+      }
+    },
+    {
+      info: 'polkadex',
+      text: t('rpc.prod.polkadex', 'Polkadex', { ns: 'apps-config' }),
+      providers: {
+        'Polkadex Team': 'wss://mainnet.polkadex.trade'
+      }
+    },
+    {
+      info: 'polymesh',
+      text: t('rpc.prod.polymesh', 'Polymesh Mainnet', { ns: 'apps-config' }),
+      providers: {
+        Polymath: 'wss://mainnet-rpc.polymesh.network'
       }
     },
     {
@@ -166,11 +223,13 @@ export function createProduction (t: TFunction, firstOnly: boolean, withSort: bo
         'SORA Parliament Ministry of Finance': 'wss://ws.mof.sora.org',
         'SORA Parliament Ministry of Finance #3': 'wss://mof3.sora.org',
         Soramitsu: 'wss://ws.alb.sora.org',
-        'SORA Community (Lux8)': 'wss://sora.lux8.net'
+        OnFinality: 'wss://sora.api.onfinality.io/public-ws'
+        // 'SORA Community (Lux8)': 'wss://sora.lux8.net' // https://github.com/polkadot-js/apps/issues/6195
       }
     },
     {
       info: 'spanner',
+      isDisabled: true, // https://github.com/polkadot-js/apps/issues/6547
       text: t('rpc.spanner', 'Spanner', { ns: 'apps-config' }),
       providers: {
         Spanner: 'wss://wss.spannerprotocol.com'
@@ -197,7 +256,8 @@ export function createProduction (t: TFunction, firstOnly: boolean, withSort: bo
       text: t('rpc.prod.subsocial', 'Subsocial', { ns: 'apps-config' }),
       providers: {
         DappForce: 'wss://rpc.subsocial.network',
-        'Patract Elara': 'wss://pub.elara.patract.io/subsocial'
+        'Patract Elara': 'wss://pub.elara.patract.io/subsocial',
+        OnFinality: 'wss://subsocial.api.onfinality.io/public-ws'
       }
     },
     {

@@ -21,7 +21,7 @@ export function createTesting (t: TFunction, firstOnly: boolean, withSort: boole
       info: 'aleph',
       text: t('rpc.test.aleph', 'Aleph Zero Testnet', { ns: 'apps-config' }),
       providers: {
-        'Aleph Zero Foundation': 'wss://test-api.alephzero.org'
+        'Aleph Zero Foundation': 'wss://ws.test.azero.dev'
       }
     },
     {
@@ -36,6 +36,21 @@ export function createTesting (t: TFunction, firstOnly: boolean, withSort: boole
       text: t('rpc.test.nodle-arcadia', 'Arcadia', { ns: 'apps-config' }),
       providers: {
         Nodle: 'wss://arcadia1.nodleprotocol.io'
+      }
+    },
+    {
+      info: 'Ares Gladios',
+      text: t('rpc.test.ares.network', 'Ares Gladios', { ns: 'apps-config' }),
+      providers: {
+        'Ares Protocol': 'wss://gladios.aresprotocol.io'
+      }
+    },
+    {
+      info: 'automata-contextfree',
+      text: t('rpc.test.automata-contextfree', 'Automata ContextFree', { ns: 'apps-config' }),
+      providers: {
+        'Automata Network': 'wss://cf-api.ata.network',
+        OnFinality: 'wss://contextfree.api.onfinality.io/public-ws'
       }
     },
     {
@@ -75,6 +90,13 @@ export function createTesting (t: TFunction, firstOnly: boolean, withSort: boole
       }
     },
     {
+      info: 'coinversation',
+      text: t('rpc.test.coinversation', 'Coinversation', { ns: 'apps-config' }),
+      providers: {
+        Coinversation: 'wss://rpc.coinversation.io/'
+      }
+    },
+    {
       info: 'Crust Maxwell',
       text: t('rpc.test.crust.network', 'Crust Maxwell', { ns: 'apps-config' }),
       providers: {
@@ -93,10 +115,9 @@ export function createTesting (t: TFunction, firstOnly: boolean, withSort: boole
     },
     {
       info: 'dock-testnet',
-      isDisabled: true, // https://github.com/polkadot-js/apps/issues/5869
-      text: t('rpc.test.dock-testnet', 'Dock', { ns: 'apps-config' }),
+      text: t('rpc.test.dock-pos-testnet', 'Dock', { ns: 'apps-config' }),
       providers: {
-        'Dock Association': 'wss://danforth-1.dock.io'
+        'Dock Association': 'wss://knox-1.dock.io'
       }
     },
     {
@@ -115,14 +136,7 @@ export function createTesting (t: TFunction, firstOnly: boolean, withSort: boole
       }
     },
     {
-      info: 'encointer_cantillon',
-      text: t('rpc.test.encointer.cantillon', 'Encointer Cantillon', { ns: 'apps-config' }),
-      providers: {
-        'Encointer Association': 'wss://cantillon.encointer.org'
-      }
-    },
-    {
-      info: 'encointer_gesell',
+      info: 'encointer',
       text: t('rpc.test.encointer.gesell', 'Encointer Gesell', { ns: 'apps-config' }),
       providers: {
         'Encointer Association': 'wss://gesell.encointer.org'
@@ -130,6 +144,7 @@ export function createTesting (t: TFunction, firstOnly: boolean, withSort: boole
     },
     {
       info: 'equilibrium',
+      isDisabled: true, // https://github.com/polkadot-js/apps/issues/6250
       text: t('rpc.test.equilibriumtestnet', 'Equilibrium', { ns: 'apps-config' }),
       providers: {
         Equilibrium: 'wss://testnet.equilibrium.io'
@@ -145,6 +160,7 @@ export function createTesting (t: TFunction, firstOnly: boolean, withSort: boole
     },
     {
       info: 'fantour',
+      isDisabled: true, // https://github.com/polkadot-js/apps/issues/6519
       text: t('rpc.test.fantour', 'Fantour', { ns: 'apps-config' }),
       providers: {
         FantourDev: 'wss://test-ws.fantour.io'
@@ -195,6 +211,7 @@ export function createTesting (t: TFunction, firstOnly: boolean, withSort: boole
     },
     {
       info: 'ipse',
+      isDisabled: true, // https://github.com/polkadot-js/apps/issues/6242
       text: t('rpc.test.ipse', 'IPSE', { ns: 'apps-config' }),
       providers: {
         'IPSE China': 'wss://testnet-china.ipse.io',
@@ -262,6 +279,7 @@ export function createTesting (t: TFunction, firstOnly: boolean, withSort: boole
     },
     {
       info: 'manta',
+      isDisabled: true, // https://github.com/polkadot-js/apps/issues/6384
       text: t('rpc.manta', 'Manta Testnet', { ns: 'apps-config' }),
       providers: {
         'Manta Testnet': 'wss://ws.f1.testnet.manta.network'
@@ -303,7 +321,7 @@ export function createTesting (t: TFunction, firstOnly: boolean, withSort: boole
       info: 'opportunity',
       text: t('rpc.test.opportunity', 'Opportunity', { ns: 'apps-config' }),
       providers: {
-        Opportunity: 'wss://rpc.opportunity.standard.tech'
+        'Standard Protocol': 'wss://rpc.opportunity.standard.tech'
       }
     },
     {
@@ -329,13 +347,22 @@ export function createTesting (t: TFunction, firstOnly: boolean, withSort: boole
     },
     {
       info: 'phoenix',
+      isDisabled: true, // https://github.com/polkadot-js/apps/issues/6181
       text: t('rpc.test.phoenix', 'Phoenix Mashnet', { ns: 'apps-config' }),
       providers: {
         'phoenix Protocol': 'wss://phoenix-ws.coinid.pro/'
       }
     },
     {
+      info: 'pichiu',
+      text: t('westend.kylin-node.co.uk', 'Pichiu Testnet', { ns: 'apps-config' }),
+      providers: {
+        'Kylin Network': 'wss://westend.kylin-node.co.uk'
+      }
+    },
+    {
       info: 'polkadex',
+      isDisabled: true, // https://github.com/polkadot-js/apps/issues/6312
       text: t('rpc.test.polkadex', 'Polkadex', { ns: 'apps-config' }),
       providers: {
         'Polkadex Team': 'wss://blockchain.polkadex.trade'
@@ -343,9 +370,9 @@ export function createTesting (t: TFunction, firstOnly: boolean, withSort: boole
     },
     {
       info: 'polymesh',
-      text: t('rpc.test.polymesh', 'Polymesh ITN', { ns: 'apps-config' }),
+      text: t('rpc.test.polymesh', 'Polymesh Testnet', { ns: 'apps-config' }),
       providers: {
-        Polymath: 'wss://itn-rpc.polymesh.live'
+        Polymath: 'wss://testnet-rpc.polymesh.live'
       }
     },
     {
@@ -371,6 +398,7 @@ export function createTesting (t: TFunction, firstOnly: boolean, withSort: boole
     },
     {
       info: 'riochain',
+      isDisabled: true, // https://github.com/polkadot-js/apps/issues/6181
       text: t('rpc.test.riochain', 'RioChain', { ns: 'apps-config' }),
       providers: {
         'RioChain Staging': 'wss://node.v1.staging.riochain.io'
@@ -398,6 +426,13 @@ export function createTesting (t: TFunction, firstOnly: boolean, withSort: boole
       }
     },
     {
+      info: 'subdao',
+      text: t('rpc.test.subdao', 'SubDAO Staging', { ns: 'apps-config' }),
+      providers: {
+        SubDAO: 'wss://alpha.subdao.org'
+      }
+    },
+    {
       info: 'subgame',
       text: t('rpc.test.subgame', 'SubGame Staging', { ns: 'apps-config' }),
       providers: {
@@ -405,10 +440,17 @@ export function createTesting (t: TFunction, firstOnly: boolean, withSort: boole
       }
     },
     {
-      info: 'ternoa-chaos',
-      text: t('rpc.test.ternoa-chaos', 'Ternoa Chaos', { ns: 'apps-config' }),
+      info: 'subspace',
+      text: t('rpc.test.subspace', 'Subspace Testnet', { ns: 'apps-config' }),
       providers: {
-        CapsuleCorp: 'wss://chaos.ternoa.com'
+        'Subspace Network': 'wss://test-rpc.subspace.network'
+      }
+    },
+    {
+      info: 'ternoa-testnet',
+      text: t('rpc.test.ternoa-testnet', 'Ternoa Testnet', { ns: 'apps-config' }),
+      providers: {
+        CapsuleCorp: 'wss://testnet.ternoa.com/'
       }
     },
     {
@@ -449,10 +491,9 @@ export function createTesting (t: TFunction, firstOnly: boolean, withSort: boole
     },
     {
       info: 'web3games',
-      isDisabled: true, // https://github.com/polkadot-js/apps/runs/2755409009?check_suite_focus=true
       text: t('rpc.test.web3games', 'Web3Games', { ns: 'apps-config' }),
       providers: {
-        Web3Games: 'wss://substrate.org.cn:4443'
+        Web3Games: 'wss://testnet.web3games.org'
       }
     },
     {
@@ -464,9 +505,9 @@ export function createTesting (t: TFunction, firstOnly: boolean, withSort: boole
     },
     {
       info: 'zeitgeist',
-      text: t('rpc.test.zeitgeist', 'Zeitgeist Battery Park', { ns: 'apps-config' }),
+      text: t('rpc.test.zeitgeist', 'Zeitgeist Battery Station', { ns: 'apps-config' }),
       providers: {
-        Zeitgeist: 'wss://bp-rpc.zeitgeist.pm'
+        Zeitgeist: 'wss://bsr.zeitgeist.pm'
       }
     },
     {
